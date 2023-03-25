@@ -42,6 +42,7 @@ Route::middleware(['splade'])->group(function () {
     Route::controller(HomeController::class)->group(function ()
     {
         Route::get('/', 'index')->name('/');
+        Route::get('/download', 'download')->name('download');
     });
 
     Route::middleware([

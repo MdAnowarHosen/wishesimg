@@ -13,4 +13,9 @@ class HomeController extends Controller
     {
         return view('frontend.home.index');
     }
+
+    public function download()
+    {
+        return view('frontend.download.index');
+    }
 }
