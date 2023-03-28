@@ -2,14 +2,14 @@
 @section('content')
 <section>
 
-<x-splade-form method="post"  :action="route('admin.categories.store')">
+<x-splade-form method="post"  :action="route('admin.sub-category.store')">
     <div class="grid gap-6 mb-6 ">
         <div class="flex justify-between">
            <div>
-            <h1 class=" text-black font-bold">Add Category</h1>
+            <h1 class=" text-black font-bold">Add Sub Category</h1>
            </div>
             <div class="">
-                <Link href="{{ route('admin.categories') }}" class="p-3 bg-indigo-600 text-white rounded-lg">All Categories</Link>
+                <Link href="{{ route('admin.sub-categories.index') }}" class="p-3 bg-indigo-600 text-white rounded-lg">All Sub Categories</Link>
             </div>
         </div>
         <div>
@@ -17,6 +17,9 @@
         </div>
         <div>
             <x-splade-input name="slug" label="Slug" placeholder="Slug" required />
+        </div>
+        <div>
+            <x-splade-select name="category_id" label="Select Parent Category" :options="$categories" option-label="name" choices option-value="id" required/>
         </div>
     </div>
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add</button>

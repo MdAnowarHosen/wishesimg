@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('category_id')->references('id')->on('categories')->onDelete('cascade');;
             $table->string('name');
             $table->string('slug')->unique();
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

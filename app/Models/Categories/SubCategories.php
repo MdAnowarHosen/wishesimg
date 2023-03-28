@@ -19,4 +19,9 @@ class SubCategories extends Model
     protected $casts = [
         'status' => 'bool',
     ];
+
+    public function category()
+    {
+        return $this->hasMany(Categories::class, 'id', 'category_id');
+    }
 }
