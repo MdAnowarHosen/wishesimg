@@ -5,16 +5,13 @@ namespace App\Http\Controllers\Admin\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Categories\CategoryAddRequest;
 use ProtoneMedia\Splade\Facades\SEO;
 use ProtoneMedia\Splade\SpladeTable;
 use App\Models\Categories\Categories;
 use Spatie\QueryBuilder\QueryBuilder;
-use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use Spatie\QueryBuilder\AllowedFilter;
-use ProtoneMedia\Splade\FormBuilder\Button;
-
-
 
 class CategoriesController extends Controller
 {
@@ -56,13 +53,8 @@ class CategoriesController extends Controller
         return view('admin.categories.add');
     }
 
-    public function store(Request $request)
+    public function store(CategoryAddRequest $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'slug' => 'required|unique:categories',
-        ]);
-
         $create = Categories::create([
             'name' => $request->name,
             'slug' => $request->slug,
