@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models\Categories;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categories extends Model
+class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'slug', 'description'
+        'uploader_id','updater_id','category_id', 'subcategory_id','name','slug','low_quality','medium_quality','high_quality','description','keywords','meta_description'
     ];
 
     protected $hidden = [
@@ -19,9 +19,4 @@ class Categories extends Model
     protected $casts = [
         'status' => 'bool',
     ];
-
-    public function subCategories()
-    {
-        return $this->hasMany(SubCategories::class, 'category_id', 'id');
-    }
 }

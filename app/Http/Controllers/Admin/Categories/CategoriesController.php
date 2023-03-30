@@ -32,8 +32,8 @@ class CategoriesController extends Controller
 
         $categories = QueryBuilder::for(Categories::class)
         ->defaultSort('name')
-        ->allowedSorts('name','slug')
-        ->allowedFilters('name','slug', $globalSearch)
+        ->allowedSorts('name','slug','description')
+        ->allowedFilters('name','slug','description', $globalSearch)
         ->paginate()
         ->withQueryString();
 
@@ -43,6 +43,7 @@ class CategoriesController extends Controller
             ->withGlobalSearch()
             ->column('name', sortable:true,searchable:true)
             ->column('slug', sortable:true,searchable:true)
+            ->column('description', sortable:true,searchable:true)
             ->column('action')
         ]);
     }
@@ -58,6 +59,7 @@ class CategoriesController extends Controller
         $create = Categories::create([
             'name' => $request->name,
             'slug' => $request->slug,
+            'description' => $request->description,
         ]);
 
         if ($create)
@@ -90,11 +92,13 @@ class CategoriesController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'slug' => "required|unique:categories,slug,$category->id",
+            'description' => 'nullable|max:256'
         ]);
 
        $update = $category->update([
             'name' => $request->name,
-            'slug' => $request->slug
+            'slug' => $request->slug,
+            'description' => $request->description,
         ]);
 
         if ($update)

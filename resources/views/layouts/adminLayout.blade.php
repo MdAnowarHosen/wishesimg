@@ -8,6 +8,11 @@
     @spladeHead
     @vite(['resources/css/app.css','resources/js/app.js'])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
+    <style>
+    .filepond--credits {
+    display: none;
+    }
+    </style>
 </head>
 <body>
     {{-- main section start --}}
@@ -108,6 +113,21 @@
                           </li>
                           <li>
                             <Link href="{{ route('admin.sub-category.create') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> Add Sub Category</Link>
+                         </li>
+                    </ul>
+                </li>
+                <li>
+                    <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" aria-controls="Products" data-collapse-toggle="Products">
+                          <x-fab-product-hunt class="w-5 h-5"/>
+                          <span class="flex-1 ml-3 text-left whitespace-nowrap">Products</span>
+                          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
+                    <ul id="Products" class="hidden py-2 space-y-2">
+                          <li>
+                             <Link href="{{ route('admin.sub-categories.index') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> All Products</Link>
+                          </li>
+                          <li>
+                            <Link href="{{ route('admin.products.create') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> Add Product</Link>
                          </li>
                     </ul>
                 </li>
@@ -216,6 +236,6 @@
          {{-- floating action button end--}}
     </section>
     {{-- main section end --}}
-
+@stack('scripts')
 </body>
 </html>
