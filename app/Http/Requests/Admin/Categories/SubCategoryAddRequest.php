@@ -25,6 +25,7 @@ class SubCategoryAddRequest extends FormRequest
             'name' => 'required|max:255',
             'slug' => 'required|unique:sub_categories',
             'category_id' => 'required|numeric',
+            'description' => 'nullable|max:256'
         ];
     }
 }
