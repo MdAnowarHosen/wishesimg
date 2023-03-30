@@ -19,7 +19,11 @@ class Categories extends Model
     protected $casts = [
         'status' => 'bool',
     ];
-
+    public function ActivatedSubCategories()
+    {
+        return $this->hasMany(SubCategories::class, 'category_id', 'id')->whereStatus(1);
+    }
+    // all subcategories
     public function subCategories()
     {
         return $this->hasMany(SubCategories::class, 'category_id', 'id');
