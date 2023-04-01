@@ -13,10 +13,6 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('uploader_id')->comment('User who upload the product');
-            $table->foreignId('updater_id')->nullable()->comment('User who update the product');
-            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreignId('subcategory_id')->references('id')->on('sub_categories')->onDelete('cascade');
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('low_quality')->comment('Product low quality');

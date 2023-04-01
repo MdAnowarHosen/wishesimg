@@ -1,0 +1,14 @@
+<?php
+
+namespace App\Models\Products;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Updater extends Model
+{
+    use HasFactory;
+    protected $fillable = [
+        'product_id', 'uploader_id'
+    ];
+}

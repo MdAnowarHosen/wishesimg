@@ -1,7 +1,7 @@
 @extends('layouts.adminLayout')
 @section('content')
 <section>
-<x-splade-form method="post"  :action="route('admin.sub-category.store')">
+<x-splade-form method="post"  :action="route('admin.products.store')">
     <div class="grid gap-6 mb-6 ">
         <div class="flex justify-between">
            <div>
@@ -17,9 +17,9 @@
         <div>
             <x-splade-input name="slug" label="Slug" placeholder="Slug" required />
         </div>
-        <x-splade-select name="category_id" label="Select Category" :options="$categories" option-label="name"  option-value="id" required/>
-        <x-splade-select name="subcategory_id" remote-url="`get/subcategory/${form.category_id}`" label="Sub Category" option-label="name" option-value="id" />
-        <x-splade-file name="file" label="Upload Image" min-size="250KB" max-size="10MB" filepond server preview />
+        <x-splade-select name="category_id[]" label="Select Category" :options="$categories" option-label="name"  option-value="id" required multiple choices/>
+        <x-splade-select name="subcategory_id[]" remote-url="`get/subcategory/${form.category_id}`" label="Sub Category" option-label="name" option-value="id" multiple choices />
+        <x-splade-file name="file" label="Upload Image" max-size="10MB" filepond server preview />
         <x-splade-input name="keywords" label="Keywords" placeholder="Keywords" />
         <x-splade-input name="meta_description" label="Meta Description" placeholder="Meta Description" />
         <x-splade-textarea name="description" label="Description" autosize />

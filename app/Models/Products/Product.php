@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'uploader_id','updater_id','category_id', 'subcategory_id','name','slug','low_quality','medium_quality','high_quality','description','keywords','meta_description'
+        'uploader_id','updater_id','name','slug','low_quality','medium_quality','high_quality','description','keywords','meta_description'
     ];
 
     protected $hidden = [

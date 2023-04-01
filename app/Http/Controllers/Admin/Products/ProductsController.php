@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Products;
 
-use App\Http\Controllers\Controller;
-use App\Models\Categories\Categories;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use ProtoneMedia\Splade\Facades\SEO;
+use App\Models\Categories\Categories;
+use App\Models\Categories\SubCategories;
+use ProtoneMedia\Splade\FileUploads\HandleSpladeFileUploads;
 
 class ProductsController extends Controller
 {
@@ -32,17 +34,62 @@ class ProductsController extends Controller
     /**
      * get sub category
      */
-    public function getSubCategory(Categories $category)
+    public function getSubCategory($category)
     {
-        return $category->subCategories;
-    }
+        try
+        {
+            $arr = explode(',',$category);
+            $count = count($arr);
+            $subCats = [];
+            for ($i=0; $i <$count ; $i++)
+            {
+                 $subCat = SubCategories::where('category_id',$arr[$i])->get();
+                 if ($subCat != null)
+                 {
+                     $subCats[] = $subCat;
+                 }
+            }
+
+            if ($subCats != null && count($subCats)>0)
+            {
+                return $subCats;
+            }
+            else
+            {
+                return 404;
+            }
+
+        }
+        catch (\Throwable $th)
+        {
+            return 502;
+        }
+
+
+ }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+
+        HandleSpladeFileUploads::forRequest($request);
+
+        dd($request);
+
+        $request->validate([
+            'photo' => ['required', 'file', 'image'],
+        ]);
+
+
+       $subCats = SubCategories::findMany($request->subcategory_id);
+       foreach ($subCats as $key => $subCat)
+       {
+            $cats = null;
+       }
+
+
     }
 
     /**
