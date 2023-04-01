@@ -5,6 +5,8 @@
 /public/storage
 /storage/*.key
 /vendor
+/storage/splade-temporary-file-uploads
+/storage/splade-temporary-file-uploads/*
 .env
 .env.backup
 .env.production

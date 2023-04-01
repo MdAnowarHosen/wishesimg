@@ -76,10 +76,18 @@ class ProductsController extends Controller
 
         HandleSpladeFileUploads::forRequest($request);
 
-        dd($request);
+       // dd($request->category_id);
 
         $request->validate([
-            'photo' => ['required', 'file', 'image'],
+            'name' => ['required', 'string', 'max:256'],
+            'slug' => ['required', 'string','unique:products'],
+            'category_id' => ['required', 'array','min:1'],
+            'subcategory_id' => ['required', 'array','min:1'],
+            'file' => ['required', 'file', 'image'],
+            'keywords' => ['nullable','string', 'max:256'],
+            'meta_description' => ['nullable','string', 'max:256'],
+            'description' => ['nullable', 'string', 'max:1000'],
+            'draft' => ['nullable', 'numeric'],
         ]);
 
 
