@@ -9,6 +9,7 @@
         "blade-ui-kit/blade-icons": "^1.5",
         "davidhsianturi/blade-bootstrap-icons": "^1.4",
         "guzzlehttp/guzzle": "^7.2",
+        "intervention/image": "^2.7",
         "laravel/dusk": "^7.7",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
