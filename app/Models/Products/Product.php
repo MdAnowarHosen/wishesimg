@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'uploader_id','updater_id','name','slug','low_quality','medium_quality','high_quality','description','keywords','meta_description'
+        'name','slug','thumbnail','low_quality','medium_quality','high_quality','description','keywords','meta_description'
     ];
 
     protected $hidden = [

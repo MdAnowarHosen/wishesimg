@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug')->unique();
+            $table->string('thumbnail')->comment('Product thumbnail');
             $table->string('low_quality')->comment('Product low quality');
             $table->string('medium_quality')->comment('Product medium quality');
             $table->string('high_quality')->comment('Product high quality');

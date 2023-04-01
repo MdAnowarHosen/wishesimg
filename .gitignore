@@ -4,6 +4,10 @@
 /public/hot
 /public/storage
 /storage/*.key
+/storage/wishesFiles
+/storage/wishesFiles/*
+/public/wishesFiles
+/public/wishesFiles/*
 /vendor
 /storage/splade-temporary-file-uploads
 /storage/splade-temporary-file-uploads/*
