@@ -122,7 +122,7 @@
                     </button>
                     <ul v-show="toggled" class="py-2 space-y-2">
                           <li>
-                             <Link href="{{ route('admin.sub-categories.index') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> All Products</Link>
+                             <Link href="{{ route('admin.products.index') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> All Products</Link>
                           </li>
                           <li>
                             <Link href="{{ route('admin.products.create') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> Add Product</Link>

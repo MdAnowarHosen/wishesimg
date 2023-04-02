@@ -5,17 +5,21 @@ namespace App\Http\Controllers\Admin\Products;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Products\Product;
+use App\Models\Products\Uploader;
+use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Products\AddProductRequest;
+use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\Facades\SEO;
+use ProtoneMedia\Splade\SpladeTable;
 use App\Models\Categories\Categories;
 use Intervention\Image\Facades\Image;
+use Spatie\QueryBuilder\QueryBuilder;
 use ProtoneMedia\Splade\Facades\Toast;
+use Spatie\QueryBuilder\AllowedFilter;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Categories\SubCategories;
 use App\Models\Products\CategoryProducts;
-use App\Models\Products\Uploader;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Admin\Products\AddProductRequest;
 use ProtoneMedia\Splade\FileUploads\HandleSpladeFileUploads;
 
 class ProductsController extends Controller
@@ -25,7 +29,40 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+        SEO::title('All Products');
+
+        $globalSearch = AllowedFilter::callback('global', function ($query, $value) {
+            $query->where(function ($query) use ($value) {
+                Collection::wrap($value)->each(function ($value) use ($query) {
+                    $query
+                        ->orWhere('name', 'LIKE', "%{$value}%")
+                        ->orWhere('slug', 'LIKE', "%{$value}%");
+                });
+            });
+        });
+
+        $products = QueryBuilder::for(Product::class)
+        ->defaultSort('-id')
+        ->allowedSorts('id','name','slug','description')
+        ->allowedFilters('name','slug','description', $globalSearch)
+        ->paginate()
+        ->withQueryString();
+
+      //  $categories = Categories::pluck('name','id')->toArray();
+
+        return view('admin.products.all',[
+            'products' => SpladeTable::for($products)
+            ->defaultSort('-id')
+            ->withGlobalSearch()
+            ->column('id', sortable:true,searchable:true,)
+            ->column('image')
+            ->column('name', sortable:true,searchable:true)
+            ->column('slug', sortable:true,searchable:true)
+            ->column('description', sortable:true,searchable:true)
+           // ->selectFilter('category_id',$categories)
+            ->column('action'),
+
+        ]);
     }
 
     /**
