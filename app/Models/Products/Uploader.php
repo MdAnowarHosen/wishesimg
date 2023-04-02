@@ -10,6 +10,6 @@ class Uploader extends Model
     use HasFactory;
 
     protected $fillable = [
-        'product_id', 'updater_id'
+        'product_id', 'uploader_id'
     ];
 }

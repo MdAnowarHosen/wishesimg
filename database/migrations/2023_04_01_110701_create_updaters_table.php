@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('updaters', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreignId('updater_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade')->comment('Product ID');
+            $table->foreignId('updater_id')->references('id')->on('users')->onDelete('cascade')->comment('Whose user ID who update the product');
             $table->timestamps();
         });
     }

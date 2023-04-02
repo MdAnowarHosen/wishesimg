@@ -4,12 +4,18 @@ namespace App\Http\Controllers\Admin\Products;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\Products\Product;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Products\AddProductRequest;
 use ProtoneMedia\Splade\Facades\SEO;
 use App\Models\Categories\Categories;
 use Intervention\Image\Facades\Image;
+use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Categories\SubCategories;
+use App\Models\Products\CategoryProducts;
+use App\Models\Products\Uploader;
+use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\FileUploads\HandleSpladeFileUploads;
 
 class ProductsController extends Controller
@@ -74,75 +80,107 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddProductRequest $request)
     {
 
         HandleSpladeFileUploads::forRequest($request);
 
-        $request->validate([
-            'name' => ['required', 'string', 'max:256'],
-            'slug' => ['required', 'string','unique:products'],
-            'category_id' => ['required', 'array','min:1'],
-            'subcategory_id' => ['required', 'array','min:1'],
-            'file' => ['required', 'file', 'image'],
-            'keywords' => ['nullable','string', 'max:256'],
-            'meta_description' => ['nullable','string', 'max:256'],
-            'description' => ['nullable', 'string', 'max:1000'],
-            'draft' => ['nullable', 'numeric'],
-        ]);
-        $data = array();
-        $image = $request->file;
-        $interventionImage = Image::make($image);
+        try {
+            $files = array();
+            $image = $request->file;
+            $interventionImage = Image::make($image);
 
-        $thumbnail =  Str::random(20).$image->hashName();
-        Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $interventionImage->encode('jpg', 15));
-        $data['thumbnail'] = $thumbnail;
+            $thumbnail =  Str::random(20).$image->hashName();
+            Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $interventionImage->encode('jpg', 15));
+            $files['thumbnail'] = $thumbnail;
 
 
-        // low product image
-        $low_image_name =  Str::random(20).$image->hashName();
-        //image manipulation
-      //  $interventionImage = Image::make($image);
-       // $interventionImage->resize(1000, 850); // width x height
+            // low product image
+            $low_image_name =  Str::random(20).$image->hashName();
+            //image manipulation
+          //  $interventionImage = Image::make($image);
+           // $interventionImage->resize(1000, 850); // width x height
 
-        // create a new Image instance for inserting
-        // $watermark = Image::make('backend/img/watermark_pattern_file.png');
-        // $interventionImage->insert($watermark, 'center');
+            // create a new Image instance for inserting
+            // $watermark = Image::make('backend/img/watermark_pattern_file.png');
+            // $interventionImage->insert($watermark, 'center');
 
-        Storage::disk('wishes')->put("product/low/" . $low_image_name, (string) $interventionImage->encode('jpg', 40));
-        $data['low_quality'] = $low_image_name;
+            Storage::disk('wishes')->put("product/low/" . $low_image_name, (string) $interventionImage->encode('jpg', 40));
+            $files['low_quality'] = $low_image_name;
 
-        // medium product image
-        $medium_image_name =  Str::random(20).$image->hashName();
-        //image manipulation
-       // $interventionImage = Image::make($image);
-       // $interventionImage->resize(1000, 850); // width x height
+            // medium product image
+            $medium_image_name =  Str::random(20).$image->hashName();
+            //image manipulation
+           // $interventionImage = Image::make($image);
+           // $interventionImage->resize(1000, 850); // width x height
 
-        // create a new Image instance for inserting
-        // $watermark = Image::make('backend/img/watermark_pattern_file.png');
-        // $interventionImage->insert($watermark, 'center');
+            // create a new Image instance for inserting
+            // $watermark = Image::make('backend/img/watermark_pattern_file.png');
+            // $interventionImage->insert($watermark, 'center');
 
-        Storage::disk('wishes')->put("product/medium/" . $medium_image_name, (string) $interventionImage->encode('jpg', 60));
-        $data['medium_quality'] = $medium_image_name;
+            Storage::disk('wishes')->put("product/medium/" . $medium_image_name, (string) $interventionImage->encode('jpg', 60));
+            $files['medium_quality'] = $medium_image_name;
 
-        // high product image
-        $high_image_name =  Str::random(20).$image->hashName();
-        //image manipulation
-      //  $interventionImage = Image::make($image);
-        Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $interventionImage->encode('jpg', 85));
-        $data['high_quality'] = $high_image_name;
-
-      //  dd($data);
+            // high product image
+            $high_image_name =  Str::random(20).$image->hashName();
+            //image manipulation
+          //  $interventionImage = Image::make($image);
+            Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $interventionImage->encode('jpg', 85));
+            $files['high_quality'] = $high_image_name;
 
 
+            // product info
+            $info = [
+                'name' => $request->name,
+                'slug' => $request->slug,
+                'keywords' => $request->keywords,
+                'meta_description' => $request->meta_description,
+                'description' => $request->description,
+            ];
 
-    //    $subCats = SubCategories::findMany($request->subcategory_id);
-    //    foreach ($subCats as $key => $subCat)
-    //    {
-    //         $cats = null;
-    //    }
+            // merge the array
+            $data = array_merge($info,$files);
 
+            //create product
+            $product = Product::create($data);
 
+            $subCats = SubCategories::findMany($request->subcategory_id);
+            foreach ($subCats as $key => $subCat)
+            {
+                    CategoryProducts::create([
+                        'category_id' => $subCat->category_id,
+                        'subcategory_id' => $subCat->id,
+                        'product_id' => $product->id,
+                    ]);
+            }
+
+            /**
+             * Create Uploader data
+             */
+
+             Uploader::create([
+                'product_id' => $product->id,
+                'uploader_id' => Auth::id(),
+             ]);
+
+             /**
+              * show success toast
+              */
+             Toast::title('Success!')
+             ->message('Product added successfully')
+             ->success()
+              ->autoDismiss(5);
+             return redirect()->back();
+
+        }
+        catch (\Throwable $th)
+        {
+            Toast::title('Failed!')
+            ->message('Something went to wrong')
+            ->danger()
+             ->autoDismiss(5);
+            return redirect()->back();
+        }
     }
 
     /**

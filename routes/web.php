@@ -49,7 +49,7 @@ Route::middleware(['splade'])->group(function () {
         Route::get('/download', 'download')->name('download');
     });
 
-    Route::prefix('wishes/admin')->name('admin.')->group(function ()
+    Route::middleware(['auth'])->prefix('wishes/admin')->name('admin.')->group(function ()
     {
 
         Route::controller(DashboardController::class)->group(function ()
