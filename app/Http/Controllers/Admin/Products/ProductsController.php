@@ -85,25 +85,7 @@ class ProductsController extends Controller
         try
         {
             $arr = explode(',',$category);
-            $count = count($arr);
-            $subCats = [];
-            for ($i=0; $i <$count ; $i++)
-            {
-                 $subCat = SubCategories::where('category_id',$arr[$i])->get();
-                 if ($subCat != null)
-                 {
-                     $subCats[] = $subCat;
-                 }
-            }
-
-            if ($subCats != null && count($subCats)>0)
-            {
-                return $subCats;
-            }
-            else
-            {
-                return 404;
-            }
+            return SubCategories::whereIn('category_id',$arr)->get();
 
         }
         catch (\Throwable $th)
@@ -113,6 +95,25 @@ class ProductsController extends Controller
 
 
  }
+
+    /**
+     * Get categories id for product edit
+    */
+    public function getSubCategoryEdit(Product $product, $category)
+    {
+        try
+        {
+            $arr = explode(',',$category);
+           return SubCategories::whereIn('category_id',$arr)->get();
+
+        }
+        catch (\Throwable $th)
+        {
+            return 502;
+        }
+
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -181,17 +182,11 @@ class ProductsController extends Controller
             //create product
             $product = Product::create($data);
 
+            /**
+             * keep data to pivot tables
+             */
             $product->categories()->attach($request->category_id);
-            $product->subCategories()->attach($request->subcategory_id);
-            // $subCats = SubCategories::findMany($request->subcategory_id);
-            // foreach ($subCats as $key => $subCat)
-            // {
-            //         CategoryProducts::create([
-            //             'category_id' => $subCat->category_id,
-            //             'subcategory_id' => $subCat->id,
-            //             'product_id' => $product->id,
-            //         ]);
-            // }
+            $product->subcategories()->attach($request->subcategory_id);
 
             /**
              * Create Uploader data
@@ -233,9 +228,15 @@ class ProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Product $product)
     {
-        //
+        $categories = $product->categories;
+        $subcategories = $product->subCategories;
+        return view('admin.products.edit',[
+            'product' => $product,
+            'categories' => $categories,
+            'subcategories' => $subcategories
+        ]);
     }
 
     /**

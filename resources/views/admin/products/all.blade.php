@@ -13,7 +13,7 @@
 
         @cell('action', $product)
         <Link href="#"><x-bi-eye-fill class="w-5 h-5 inline mx-2" /></Link>
-        <Link href="{{ route('admin.sub-category.edit',$product->id) }}"><x-fas-edit class="w-5 h-5 inline mx-2" /></Link>
+        <Link href="{{ route('admin.products.edit',$product->id) }}"><x-fas-edit class="w-5 h-5 inline mx-2" /></Link>
         <Link href="{{ route('admin.sub-category.destroy',$product->id) }}"
         method="delete"
         confirm="Delete"

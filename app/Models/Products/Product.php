@@ -29,7 +29,7 @@ class Product extends Model
     }
 
     // many to many relationship
-    public function subCategories()
+    public function subcategories()
     {
         return $this->belongsToMany(SubCategories::class, 'subcat_products','product_id','subcategory_id'); //pivot table, that model id
     }
