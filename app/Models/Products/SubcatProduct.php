@@ -2,17 +2,16 @@
 
 namespace App\Models\Products;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class CategoryProducts extends Pivot
+class SubcatProduct extends Pivot
 {
     use HasFactory;
 
     protected $fillable = [
-        'category_id', 'product_id'
+        'subcategory_id', 'product_id'
     ];
-
 
 }

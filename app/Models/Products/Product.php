@@ -2,6 +2,8 @@
 
 namespace App\Models\Products;
 
+use App\Models\Categories\Categories;
+use App\Models\Categories\SubCategories;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,4 +21,16 @@ class Product extends Model
     protected $casts = [
         'status' => 'bool',
     ];
+
+    // many to many relationship
+    public function categories()
+    {
+        return $this->belongsToMany(Categories::class, 'category_products','product_id','category_id'); //pivot table, that model id,
+    }
+
+    // many to many relationship
+    public function subCategories()
+    {
+        return $this->belongsToMany(SubCategories::class, 'subcat_products','product_id','subcategory_id'); //pivot table, that model id
+    }
 }

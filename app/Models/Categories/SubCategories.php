@@ -20,6 +20,12 @@ class SubCategories extends Model
         'status' => 'bool',
     ];
 
+    // many to many relationship
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'subcat_products','subcategory_id','product_id'); //pivot table,
+    }
+
     public function category()
     {
         return $this->hasMany(Categories::class, 'id', 'category_id');

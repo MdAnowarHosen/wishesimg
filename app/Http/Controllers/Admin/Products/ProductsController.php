@@ -181,15 +181,17 @@ class ProductsController extends Controller
             //create product
             $product = Product::create($data);
 
-            $subCats = SubCategories::findMany($request->subcategory_id);
-            foreach ($subCats as $key => $subCat)
-            {
-                    CategoryProducts::create([
-                        'category_id' => $subCat->category_id,
-                        'subcategory_id' => $subCat->id,
-                        'product_id' => $product->id,
-                    ]);
-            }
+            $product->categories()->attach($request->category_id);
+            $product->subCategories()->attach($request->subcategory_id);
+            // $subCats = SubCategories::findMany($request->subcategory_id);
+            // foreach ($subCats as $key => $subCat)
+            // {
+            //         CategoryProducts::create([
+            //             'category_id' => $subCat->category_id,
+            //             'subcategory_id' => $subCat->id,
+            //             'product_id' => $product->id,
+            //         ]);
+            // }
 
             /**
              * Create Uploader data
