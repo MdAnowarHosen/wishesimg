@@ -53,8 +53,8 @@ class ProductsController extends Controller
         ->paginate()
         ->withQueryString();
 
-        $categories = Categories::pluck('name','id')->toArray();
-        $subcategories = SubCategories::pluck('name','id')->toArray();
+        $categories = Categories::whereStatus(1)->pluck('name','id')->toArray();
+        $subcategories = SubCategories::whereStatus(1)->pluck('name','id')->toArray();
 
         return view('admin.products.all',[
             'products' => SpladeTable::for($products)
