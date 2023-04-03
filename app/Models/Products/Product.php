@@ -3,13 +3,16 @@
 namespace App\Models\Products;
 
 use App\Models\Categories\Categories;
+use Kirschbaum\PowerJoins\PowerJoins;
+use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories\SubCategories;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     use HasFactory;
+    use PowerJoins;
+
     protected $fillable = [
         'name','slug','thumbnail','low_quality','medium_quality','high_quality','description','keywords','meta_description'
     ];

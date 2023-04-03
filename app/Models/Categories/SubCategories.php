@@ -2,12 +2,15 @@
 
 namespace App\Models\Categories;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Kirschbaum\PowerJoins\PowerJoins;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SubCategories extends Model
 {
     use HasFactory;
+    use PowerJoins;
+
     protected $fillable = [
         'category_id', 'name', 'slug', 'description'
     ];

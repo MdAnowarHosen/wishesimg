@@ -3,12 +3,15 @@
 namespace App\Models\Categories;
 
 use App\Models\Products\Product;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Kirschbaum\PowerJoins\PowerJoins;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Categories extends Model
 {
     use HasFactory;
+    use PowerJoins;
+
     protected $fillable = [
         'name', 'slug', 'description'
     ];
