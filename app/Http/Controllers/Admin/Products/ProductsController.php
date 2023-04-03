@@ -38,19 +38,23 @@ class ProductsController extends Controller
                 Collection::wrap($value)->each(function ($value) use ($query) {
                     $query
                         ->orWhere('name', 'LIKE', "%{$value}%")
-                        ->orWhere('slug', 'LIKE', "%{$value}%");
+                        ->orWhere('slug', 'LIKE', "%{$value}%")
+                        ->orWhere('description', 'LIKE', "%{$value}%");
+                        // ->orWhere('categories.name', 'LIKE', "%{$value}%")
+                        // ->orWhere('subcategories.name', 'LIKE', "%{$value}%");
                 });
             });
         });
 
         $products = QueryBuilder::for(Product::class)
         ->defaultSort('-id')
-        ->allowedSorts('id','name','slug','description')
-        ->allowedFilters('name','slug','description', $globalSearch)
+        ->allowedSorts('id','name','slug','description','categories.id','subcategories.id','categories.name','subcategories.name')
+        ->allowedFilters('name','slug','description','categories.id','subcategories.id','categories.name','subcategories.name', $globalSearch)
         ->paginate()
         ->withQueryString();
 
-      //  $categories = Categories::pluck('name','id')->toArray();
+        $categories = Categories::whereStatus(1)->pluck('name','id')->toArray();
+        $subcategories = SubCategories::whereStatus(1)->pluck('name','id')->toArray();
 
         return view('admin.products.all',[
             'products' => SpladeTable::for($products)
@@ -61,9 +65,27 @@ class ProductsController extends Controller
             ->column('name', sortable:true,searchable:true)
             ->column('slug', sortable:true,searchable:true)
             ->column('description', sortable:true,searchable:true)
-           // ->selectFilter('category_id',$categories)
+           ->column(
+                key: 'categories.name',
+                label: 'Category',
+                sortable: true,
+                searchable:true
+            )
+            ->column(
+                key: 'subcategories.name',
+                label: 'Sub Category',
+                sortable: true,
+                searchable:true
+            )
+            ->selectFilter(
+                key: 'categories.id',
+                options: $categories
+            )
+            ->selectFilter(
+                key: 'subcategories.id',
+                options: $subcategories
+            )
             ->column('action'),
-
         ]);
     }
 

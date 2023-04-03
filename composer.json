@@ -10,6 +10,7 @@
         "davidhsianturi/blade-bootstrap-icons": "^1.4",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
+        "kirschbaum-development/eloquent-power-joins": "^3.0",
         "laravel/dusk": "^7.7",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
