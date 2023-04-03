@@ -10,6 +10,8 @@ class SubcatProduct extends Pivot
 {
     use HasFactory;
 
+    protected $table = "subcat_products";
+
     protected $fillable = [
         'subcategory_id', 'product_id'
     ];

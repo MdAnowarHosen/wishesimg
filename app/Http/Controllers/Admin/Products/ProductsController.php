@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Categories\SubCategories;
 use App\Models\Products\CategoryProducts;
 use App\Http\Requests\Admin\Products\AddProductRequest;
+use App\Models\Products\SubcatProduct;
 use ProtoneMedia\Splade\FileUploads\HandleSpladeFileUploads;
 
 class ProductsController extends Controller
@@ -318,10 +319,40 @@ class ProductsController extends Controller
             $update = Product::whereId($product->id)->update($data);
             if ($update)
             {
+
+
                 /**
-                 * add / remove categories for that product
+                 * check category added or removed or not! if added or removed
+                 * then make the change to database
                  */
-                $product->categories()->sync($request->categories);
+                $catData = CategoryProducts::whereProduct_id($product->id)->pluck('category_id');
+                $catsArray = json_decode($catData);
+                $addCats=array_diff($request->categories,$catsArray);
+                $removedCats=array_diff($catsArray,$request->categories);
+                if ($addCats != null || $removedCats != null)
+                {
+                    /**
+                     * add / remove categories for that product
+                     */
+                    $product->categories()->sync($request->categories);
+                }
+
+                  /**
+                 * check subcategory added or removed or not! if added or removed
+                 * then make the change to database
+                 */
+                $SubCatData = SubcatProduct::whereProduct_id($product->id)->pluck('subcategory_id');
+                $subCatsArray = json_decode($SubCatData);
+                $addSubCats=array_diff($request->subcategories,$subCatsArray);
+                $rmSubCats=array_diff($subCatsArray,$request->subcategories);
+
+                if ($addSubCats != null || $rmSubCats != null)
+                {
+                    /**
+                     * add / remove subcategories for that product
+                     */
+                    $product->subcategories()->sync($request->subcategories);
+                }
 
                 /**
                  * remove old product photo
