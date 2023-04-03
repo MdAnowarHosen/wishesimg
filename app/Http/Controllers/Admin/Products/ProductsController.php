@@ -77,13 +77,15 @@ class ProductsController extends Controller
                 sortable: true,
                 searchable:true
             )
-            ->selectFilter(key: 'categories.id',
-            options: $categories)
-
-            ->selectFilter(key: 'subcategories.id',
-            options: $subcategories)
+            ->selectFilter(
+                key: 'categories.id',
+                options: $categories
+            )
+            ->selectFilter(
+                key: 'subcategories.id',
+                options: $subcategories
+            )
             ->column('action'),
-
         ]);
     }
 
