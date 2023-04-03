@@ -254,6 +254,7 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
+        SEO::title('Edit Product');
         $categories = Categories::whereStatus(1)->get();
         $subcategories = SubCategories::whereIn('category_id',$product->categories->pluck('id'))->get();
         return view('admin.products.edit',[
@@ -448,8 +449,59 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Product $product)
     {
-        //
+        DB::beginTransaction();
+        try
+        {
+            $old = $product;
+            $delete = $product->delete();
+            if ($delete)
+            {
+                $path = "product/thumbnail/" . $old->thumbnail;
+                if (Storage::disk('wishes')->exists($path))
+                {
+                    Storage::disk('wishes')->delete($path);
+                }
+                $path = "product/low/" . $old->low_quality;
+                if (Storage::disk('wishes')->exists($path))
+                {
+                    Storage::disk('wishes')->delete($path);
+                }
+                $path = "product/medium/" . $old->medium_quality;
+                if (Storage::disk('wishes')->exists($path))
+                {
+                    Storage::disk('wishes')->delete($path);
+                }
+                $path = "product/high/" . $old->high_quality;
+                if (Storage::disk('wishes')->exists($path))
+                {
+                    Storage::disk('wishes')->delete($path);
+                }
+                DB::commit();
+                Toast::title('Success')
+                ->message('Successfully product has been deleted')
+                ->success()
+                ->autoDismiss(5);
+                return redirect()->back();
+            }
+            else
+            {
+                Toast::title('Failed')
+                ->message('Something went to wrong')
+                ->warning()
+                ->autoDismiss(5);
+                return redirect()->back();
+            }
+        }
+        catch (\Throwable $th)
+        {
+            DB::rollBack();
+            Toast::title('Failed')
+            ->message('Failed to delete product')
+            ->danger()
+            ->autoDismiss(5);
+            return redirect()->back();
+        }
     }
 }

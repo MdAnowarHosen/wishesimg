@@ -8,7 +8,7 @@
             <h1 class=" text-black font-bold">Add Product</h1>
            </div>
             <div class="">
-                <Link href="{{ route('admin.sub-categories.index') }}" class="p-3 bg-indigo-600 text-white rounded-lg">All Sub Categories</Link>
+                <Link href="{{ route('admin.products.index') }}" class="p-3 bg-indigo-600 text-white rounded-lg">All Products</Link>
             </div>
         </div>
         <div>
