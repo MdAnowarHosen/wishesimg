@@ -19,6 +19,11 @@
         </div>
         <x-splade-select name="categories[]" label="Select Category" :options="$categories" option-label="name"  option-value="id" required relation multiple choices/>
         <x-splade-select name="subcategories[]" remote-url="`get/subcategory/${form.categories}`" label="Sub Category" option-label="name" option-value="id" relation multiple choices />
+       <div>
+        @foreach ($product->subcategories as $subcat)
+        <span class="inline py-1 px-2 text-white mr-1 rounded-lg bg-amber-500">{{ $subcat->name }} </span>
+        @endforeach
+       </div>
         <x-splade-file name="file" label="Upload Image" max-size="10MB" filepond server preview />
         <img class="h-40 w-auto" src="{{ Storage::disk('wishes')->url('wishesFiles/product/thumbnail/'.$product->thumbnail) }}" alt="">
         <x-splade-input name="keywords" label="Keywords" placeholder="Keywords" />

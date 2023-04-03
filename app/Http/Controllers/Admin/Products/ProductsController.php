@@ -232,7 +232,7 @@ class ProductsController extends Controller
     public function edit(Product $product)
     {
         $categories = Categories::whereStatus(1)->get();
-        $subcategories = $product->subCategories;
+        $subcategories = SubCategories::whereIn('category_id',$product->categories->pluck('id'))->get();
         return view('admin.products.edit',[
             'product' => $product,
             'categories' => $categories,
@@ -265,13 +265,6 @@ class ProductsController extends Controller
         {
             $info['meta_description'] = $request->meta_description;
         }
-
-    //    $cat = CategoryProducts::whereProduct_id($product->id)->pluck('category_id');
-    //    $cats = json_decode($cat);
-    //   // dd(var_dump($cats));
-    //    $addCats=array_diff($request->categories,$cats);
-    //    $removedCats=array_diff($cats,$request->categories);
-    //     dd($request->categories);
 
         $files = array();
         $image = $request->file('file');
