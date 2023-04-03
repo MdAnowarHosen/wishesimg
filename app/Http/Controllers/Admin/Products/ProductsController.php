@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Products\Product;
 use App\Models\Products\Uploader;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\Facades\SEO;
@@ -125,16 +126,16 @@ class ProductsController extends Controller
 
         try {
             $files = array();
-            $image = $request->file;
+            $image = $request->file('file');
             $interventionImage = Image::make($image);
 
-            $thumbnail =  Str::random(20).$image->hashName();
+            $thumbnail =  Str::random(25).$image->hashName();
             Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $interventionImage->encode('jpg', 15));
             $files['thumbnail'] = $thumbnail;
 
 
             // low product image
-            $low_image_name =  Str::random(20).$image->hashName();
+            $low_image_name =  Str::random(25).$image->hashName();
             //image manipulation
           //  $interventionImage = Image::make($image);
            // $interventionImage->resize(1000, 850); // width x height
@@ -147,7 +148,7 @@ class ProductsController extends Controller
             $files['low_quality'] = $low_image_name;
 
             // medium product image
-            $medium_image_name =  Str::random(20).$image->hashName();
+            $medium_image_name =  Str::random(25).$image->hashName();
             //image manipulation
            // $interventionImage = Image::make($image);
            // $interventionImage->resize(1000, 850); // width x height
@@ -160,7 +161,7 @@ class ProductsController extends Controller
             $files['medium_quality'] = $medium_image_name;
 
             // high product image
-            $high_image_name =  Str::random(20).$image->hashName();
+            $high_image_name =  Str::random(25).$image->hashName();
             //image manipulation
           //  $interventionImage = Image::make($image);
             Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $interventionImage->encode('jpg', 85));
@@ -230,7 +231,7 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
-        $categories = $product->categories;
+        $categories = Categories::whereStatus(1)->get();
         $subcategories = $product->subCategories;
         return view('admin.products.edit',[
             'product' => $product,
@@ -242,9 +243,160 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AddProductRequest $request, Product $product)
     {
-        //
+
+        $old = $product;
+        $info = array();
+
+        if ($request->name != $product->name)
+        {
+           $info['name'] = $request->name;
+        }
+        if ($request->slug != $product->slug)
+        {
+            $info['slug'] = $request->slug;
+        }
+        if ($request->keywords != null && $request->keywords != $product->keywords)
+        {
+            $info['keywords'] = $request->keywords;
+        }
+        if ($request->meta_description != null && $request->meta_description != $product->meta_description)
+        {
+            $info['meta_description'] = $request->meta_description;
+        }
+
+    //    $cat = CategoryProducts::whereProduct_id($product->id)->pluck('category_id');
+    //    $cats = json_decode($cat);
+    //   // dd(var_dump($cats));
+    //    $addCats=array_diff($request->categories,$cats);
+    //    $removedCats=array_diff($cats,$request->categories);
+    //     dd($request->categories);
+
+        $files = array();
+        $image = $request->file('file');
+
+        if ($image != null)
+        {
+
+        $interventionImage = Image::make($image);
+
+        $thumbnail =  Str::random(25).$image->hashName();
+        Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $interventionImage->encode('jpg', 15));
+        $files['thumbnail'] = $thumbnail;
+
+
+        // low product image
+        $low_image_name =  Str::random(25).$image->hashName();
+        //image manipulation
+        //  $interventionImage = Image::make($image);
+        // $interventionImage->resize(1000, 850); // width x height
+
+        // create a new Image instance for inserting
+        // $watermark = Image::make('backend/img/watermark_pattern_file.png');
+        // $interventionImage->insert($watermark, 'center');
+
+        Storage::disk('wishes')->put("product/low/" . $low_image_name, (string) $interventionImage->encode('jpg', 40));
+        $files['low_quality'] = $low_image_name;
+        // medium product image
+        $medium_image_name =  Str::random(25).$image->hashName();
+        //image manipulation
+        // $interventionImage = Image::make($image);
+        // $interventionImage->resize(1000, 850); // width x height
+        // create a new Image instance for inserting
+        // $watermark = Image::make('backend/img/watermark_pattern_file.png');
+        // $interventionImage->insert($watermark, 'center');
+
+       Storage::disk('wishes')->put("product/medium/" . $medium_image_name, (string) $interventionImage->encode('jpg', 60));
+        $files['medium_quality'] = $medium_image_name;
+
+        // high product image
+        $high_image_name =  Str::random(25).$image->hashName();
+        //image manipulation
+        //  $interventionImage = Image::make($image);
+        Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $interventionImage->encode('jpg', 85));
+        $files['high_quality'] = $high_image_name;
+        }
+
+        DB::beginTransaction();
+        try
+        {
+            $data = array_merge($info,$files);
+            $update = Product::whereId($product->id)->update($data);
+            if ($update)
+            {
+                /**
+                 * add / remove categories for that product
+                 */
+                $product->categories()->sync($request->categories);
+
+                /**
+                 * remove old product photo
+                 *
+                 */
+                    $path = "product/thumbnail/" . $old->thumbnail;
+                    if (Storage::disk('wishes')->exists($path))
+                    {
+                        Storage::disk('wishes')->delete($path);
+                    }
+                    $path = "product/low/" . $old->low_quality;
+                    if (Storage::disk('wishes')->exists($path))
+                    {
+                        Storage::disk('wishes')->delete($path);
+                    }
+                    $path = "product/medium/" . $old->medium_quality;
+                    if (Storage::disk('wishes')->exists($path))
+                    {
+                        Storage::disk('wishes')->delete($path);
+                    }
+                    $path = "product/high/" . $old->high_quality;
+                    if (Storage::disk('wishes')->exists($path))
+                    {
+                        Storage::disk('wishes')->delete($path);
+                    }
+
+                DB::commit();
+                Toast::title('Success')
+                ->message('Product updated successfully')
+                ->success()
+                ->autoDismiss(5);
+                return redirect()->back();
+            }
+        }
+        catch (\Throwable $th)
+        {
+            DB::rollBack();
+                    /**
+                     * remove recently uploaded product photo
+                     *
+                     */
+                    $path = "product/thumbnail/" . $thumbnail;
+                    if (Storage::disk('wishes')->exists($path))
+                    {
+                        Storage::disk('wishes')->delete($path);
+                    }
+                    $path = "product/low/" . $low_image_name;
+                    if (Storage::disk('wishes')->exists($path))
+                    {
+                        Storage::disk('wishes')->delete($path);
+                    }
+                    $path = "product/medium/" . $medium_image_name;
+                    if (Storage::disk('wishes')->exists($path))
+                    {
+                        Storage::disk('wishes')->delete($path);
+                    }
+                    $path = "product/high/" . $old->high_quality;
+                    if (Storage::disk('wishes')->exists($path))
+                    {
+                        Storage::disk('wishes')->delete($path);
+                    }
+            Toast::title('Failed')
+            ->message('Failed to update product')
+            ->danger()
+            ->autoDismiss(5);
+            return redirect()->back();
+        }
+
     }
 
     /**

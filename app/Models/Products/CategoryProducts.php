@@ -10,6 +10,8 @@ class CategoryProducts extends Pivot
 {
     use HasFactory;
 
+    protected $table = "category_products";
+
     protected $fillable = [
         'category_id', 'product_id'
     ];
