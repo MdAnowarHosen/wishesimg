@@ -26,7 +26,7 @@ class SubCategories extends Model
     // many to many relationship
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'subcat_products','subcategory_id','product_id'); //pivot table,
+        return $this->belongsToMany(Product::class, 'subcat_products','subcategory_id','product_id')->withTimestamps(); //pivot table,
     }
 
     public function category()

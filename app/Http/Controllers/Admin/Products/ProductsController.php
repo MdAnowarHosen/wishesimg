@@ -22,6 +22,7 @@ use App\Models\Categories\SubCategories;
 use App\Models\Products\CategoryProducts;
 use App\Http\Requests\Admin\Products\AddProductRequest;
 use App\Models\Products\SubcatProduct;
+use App\Models\Products\Updater;
 use ProtoneMedia\Splade\FileUploads\HandleSpladeFileUploads;
 
 class ProductsController extends Controller
@@ -289,6 +290,10 @@ class ProductsController extends Controller
         {
             $info['meta_description'] = $request->meta_description;
         }
+        if ($request->description != null && $request->description != $product->description)
+        {
+            $info['description'] = $request->description;
+        }
 
         $files = array();
         $image = $request->file('file');
@@ -401,6 +406,12 @@ class ProductsController extends Controller
                     {
                         Storage::disk('wishes')->delete($path);
                     }
+
+                    // store updater data
+                    Updater::create([
+                        'product_id' => $product->id,
+                        'updater_id' => Auth::id(),
+                    ]);
 
                 DB::commit();
                 Toast::title('Success')

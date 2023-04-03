@@ -31,7 +31,7 @@ class Categories extends Model
     // many to many relationship
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'category_products','category_id','product_id'); //pivot table,
+        return $this->belongsToMany(Product::class, 'category_products','category_id','product_id')->withTimestamps(); //pivot table,
     }
 
     // all subcategories

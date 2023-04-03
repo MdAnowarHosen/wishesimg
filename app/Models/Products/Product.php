@@ -28,12 +28,12 @@ class Product extends Model
     // many to many relationship
     public function categories()
     {
-        return $this->belongsToMany(Categories::class, 'category_products','product_id','category_id'); //pivot table, that model id,
+        return $this->belongsToMany(Categories::class, 'category_products','product_id','category_id')->withTimestamps(); //pivot table, that model id,
     }
 
     // many to many relationship
     public function subcategories()
     {
-        return $this->belongsToMany(SubCategories::class, 'subcat_products','product_id','subcategory_id'); //pivot table, that model id
+        return $this->belongsToMany(SubCategories::class, 'subcat_products','product_id','subcategory_id')->withTimestamps(); //pivot table, that model id
     }
 }
