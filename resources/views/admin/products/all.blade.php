@@ -2,7 +2,6 @@
 @section('content')
 <section>
     <x-splade-table :for="$products" as="$product" search-debounce="1000">
-
         @cell('id', $product)
         {{ $product->id }}
         @endcell
@@ -12,7 +11,7 @@
         @endcell
 
         @cell('action', $product)
-        <Link href="#"><x-bi-eye-fill class="w-5 h-5 inline mx-2" /></Link>
+        <Link href="{{ route('admin.products.show',$product->id) }}"><x-bi-eye-fill class="w-5 h-5 inline mx-2" /></Link>
         <Link href="{{ route('admin.products.edit',$product->id) }}"><x-fas-edit class="w-5 h-5 inline mx-2" /></Link>
         <Link href="{{ route('admin.products.destroy',$product->id) }}"
         method="delete"

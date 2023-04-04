@@ -25,7 +25,7 @@
         @endforeach
        </div>
         <x-splade-file name="file" label="Upload Image" max-size="10MB" filepond server preview />
-        <img class="h-40 w-auto" src="{{ Storage::disk('wishes')->url('wishesFiles/product/thumbnail/'.$product->thumbnail) }}" alt="">
+        <img class="h-40 w-auto" src="{{ Storage::disk('wishes')->url('wishesFiles/product/thumbnail/'.$product->thumbnail) }}" alt="{{ $product->name }}">
         <x-splade-input name="keywords" label="Keywords" placeholder="Keywords" />
         <x-splade-input name="meta_description" label="Meta Description" placeholder="Meta Description" />
         <x-splade-textarea name="description" label="Description" autosize />

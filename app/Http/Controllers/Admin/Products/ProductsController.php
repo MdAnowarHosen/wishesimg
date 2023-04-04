@@ -41,8 +41,6 @@ class ProductsController extends Controller
                         ->orWhere('name', 'LIKE', "%{$value}%")
                         ->orWhere('slug', 'LIKE', "%{$value}%")
                         ->orWhere('description', 'LIKE', "%{$value}%");
-                        // ->orWhere('categories.name', 'LIKE', "%{$value}%")
-                        // ->orWhere('subcategories.name', 'LIKE', "%{$value}%");
                 });
             });
         });
@@ -245,9 +243,11 @@ class ProductsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Product $product)
     {
-        //
+        return view('admin.products.show',[
+            'product' => $product,
+        ]);
     }
 
     /**
