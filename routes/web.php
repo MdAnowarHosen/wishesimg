@@ -46,7 +46,7 @@ Route::middleware(['splade'])->group(function () {
     Route::controller(HomeController::class)->group(function ()
     {
         Route::get('/', 'index')->name('/');
-        Route::get('/download', 'download')->name('download');
+        Route::get('/{productSlug}', 'show')->name('show.product');
     });
 
     Route::middleware(['auth'])->prefix('wishes/admin')->name('admin.')->group(function ()

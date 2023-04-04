@@ -174,31 +174,23 @@
                                 Ads
                             </div>
                         </div>
-                        <div class="my-5">
-                            <a href="{{ route('download') }}">
-                                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="my-5">
-                            <a href="{{ route('download') }}">
-                                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="my-5">
-                            <div style="width: 250px; height: 250px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
-                                Ads
-                            </div>
-                        </div>
-                        <div class="my-5">
-                            <a href="{{ route('download') }}">
-                                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-                            </a>
-                        </div>
-                        <div class="my-5">
-                            <a href="{{ route('download') }}">
-                                <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-                            </a>
-                        </div>
+
+                        @foreach ($rightSideRandProduct->chunk(2) as $rightSideChunk)
+                                @foreach ($rightSideChunk as $rtpro)
+                                <div class="my-5">
+                                    <a href="{{ route('show.product',$rtpro->slug) }}">
+                                        <img class="h-auto max-w-full rounded-lg" src="{{ Storage::disk('wishes')->url('wishesFiles/product/thumbnail/'.$rtpro->thumbnail) }}" alt="{{ $rtpro->name }}">
+                                    </a>
+                                </div>
+                                @endforeach
+                                <div class="my-5">
+                                    <div style="width: 250px; height: 250px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
+                                        Ads
+                                    </div>
+                                </div>
+                        @endforeach
+
+
                     </div>
                 </div>
              </div>
