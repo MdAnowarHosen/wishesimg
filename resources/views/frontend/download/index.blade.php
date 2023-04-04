@@ -24,7 +24,7 @@
                         </p>
                     </div>
                     <div class="mt-10">
-                        <div class="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-2 gap-4">
                             <div class="grid gap-4">
                                 <div>
                                     <a href="{{ route('download') }}">
@@ -36,11 +36,7 @@
                                         <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
                                     </a>
                                 </div>
-                                <div>
-                                    <a href="{{ route('download') }}">
-                                        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-                                    </a>
-                                </div>
+
                             </div>
                             <div class="grid gap-4">
                                 <div>
@@ -51,11 +47,6 @@
                                 <div>
                                     <a href="{{ route('download') }}">
                                         <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="{{ route('download') }}">
-                                        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -70,11 +61,7 @@
                                         <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
                                     </a>
                                 </div>
-                                <div>
-                                    <a href="{{ route('download') }}">
-                                        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-8.jpg" alt="">
-                                    </a>
-                                </div>
+
                             </div>
                             <div class="grid gap-4">
                                 <div>
@@ -87,46 +74,9 @@
                                         <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg" alt="">
                                     </a>
                                 </div>
-                                <div>
-                                    <a href="{{ route('download') }}">
-                                        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-11.jpg" alt="">
-                                    </a>
-                                </div>
+
                             </div>
-                            <div class="grid gap-4">
-                                <div>
-                                    <a href="{{ route('download') }}">
-                                        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="{{ route('download') }}">
-                                        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="{{ route('download') }}">
-                                        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-2.jpg" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="grid gap-4">
-                                <div>
-                                    <a href="{{ route('download') }}">
-                                        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="{{ route('download') }}">
-                                        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="{{ route('download') }}">
-                                        <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-5.jpg" alt="">
-                                    </a>
-                                </div>
-                            </div>
+
                         </div>
                         {{-- images end --}}
                     </div>
@@ -181,89 +131,58 @@
                 </a>
               </div>
               {{-- ad --}}
-              <div class="mt-3">
+              {{-- <div class="mt-3">
                 <a href="#">
                     <img src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
                 </a>
-              </div>
+              </div> --}}
+              {{-- <div class="mt-2 md:mr-1">
+                <div style="width: 250px; height: 250px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
+                    Ad
+                </div>
+            </div> --}}
+
+            <div class="mt-3 mb-1">
+                <div style="width: 250px; height: 250px; background: #e2e5e7; color: #424242; line-height: 250px; text-align: center; ">
+                    Ads
+                </div>
+            </div>
+
         </div>
          {{-- Desktip image info and download option end--}}
           {{-- more images --}}
          <div class="mt-5">
             <h4 class="bg-gray-200 rounded-md py-1 px-3 font-bold text-gray-800 mb-2">Same Artist</h4>
-            <div class="grid grid-cols-2 lg:grid-cols-2 md:grid-cols-2 gap-4">
-                <div class="grid gap-4">
+            <div class="grid grid-cols-1">
+                <div class="grid my-1">
                     <div>
                         <a href="{{ route('download') }}">
                             <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
                         </a>
                     </div>
-                    <div>
-                        <a href="{{ route('download') }}">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-                        </a>
-                    </div>
                 </div>
-                <div class="grid gap-4">
+                <div class="grid my-1">
                     <div>
                         <a href="{{ route('download') }}">
                             <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
                         </a>
                     </div>
-                    <div>
-                        <a href="{{ route('download') }}">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
-                        </a>
-                    </div>
                 </div>
-                <div class="grid gap-4">
+                <div class="grid my-1">
                     <div>
                         <a href="{{ route('download') }}">
                             <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
                         </a>
                     </div>
-                    <div>
-                        <a href="{{ route('download') }}">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-7.jpg" alt="">
-                        </a>
-                    </div>
                 </div>
-                <div class="grid gap-4">
+                <div class="grid my-1">
                     <div>
                         <a href="{{ route('download') }}">
                             <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="">
                         </a>
                     </div>
-                    <div>
-                        <a href="{{ route('download') }}">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-10.jpg" alt="">
-                        </a>
-                    </div>
                 </div>
-                <div class="grid gap-4">
-                    <div>
-                        <a href="{{ route('download') }}">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-                        </a>
-                    </div>
-                    <div>
-                        <a href="{{ route('download') }}">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-1.jpg" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="grid gap-4">
-                    <div>
-                        <a href="{{ route('download') }}">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-                        </a>
-                    </div>
-                    <div>
-                        <a href="{{ route('download') }}">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-4.jpg" alt="">
-                        </a>
-                    </div>
-                </div>
+
             </div>
          </div>
         {{-- more images end --}}
