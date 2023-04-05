@@ -100,7 +100,7 @@
             </div> --}}
 
             <div class="mt-3 mb-1">
-                <div style="width: 250px; height: 250px; background: #e2e5e7; color: #424242; line-height: 250px; text-align: center; ">
+                <div class="rounded" style="width: 250px; height: 250px; background: #e2e5e7; color: #424242; line-height: 250px; text-align: center; ">
                     Ads
                 </div>
             </div>
@@ -113,32 +113,20 @@
             <div class="grid grid-cols-1">
                 <div class="grid my-1">
                     <div>
-                        <a href="#">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-                        </a>
+                        <div class="rounded" style="width: 250px; height: 300px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
+                            Ads
+                        </div>
                     </div>
                 </div>
+                @foreach ($thoseCatsPro as $thospro)
                 <div class="grid my-1">
                     <div>
-                        <a href="#">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-3.jpg" alt="">
-                        </a>
+                        <Link href="{{ route('show.product',$thospro->slug) }}">
+                            <img class="h-auto max-w-full rounded-lg" src="{{ Storage::disk('wishes')->url('wishesFiles/product/thumbnail/'.$thospro->thumbnail) }}" alt="{{ $thospro->name }}">
+                        </Link>
                     </div>
                 </div>
-                <div class="grid my-1">
-                    <div>
-                        <a href="#">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-6.jpg" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="grid my-1">
-                    <div>
-                        <a href="#">
-                            <img class="h-auto max-w-full rounded-lg" src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image-9.jpg" alt="">
-                        </a>
-                    </div>
-                </div>
+                @endforeach
 
             </div>
          </div>

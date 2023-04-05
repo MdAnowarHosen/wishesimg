@@ -170,7 +170,7 @@
                     {{-- ad section --}}
                     <div class="col-span-12 md:col-span-3">
                         <div class="hidden md:block sticky top-20 mb-1">
-                            <div style="width: 250px; height: 300px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
+                            <div class="rounded" style="width: 250px; height: 300px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
                                 Ads
                             </div>
                         </div>
@@ -184,7 +184,7 @@
                                 </div>
                                 @endforeach
                                 <div class="my-5">
-                                    <div style="width: 250px; height: 250px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
+                                    <div class="rounded" style="width: 250px; height: 250px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
                                         Ads
                                     </div>
                                 </div>
@@ -229,7 +229,7 @@
             <div class="hidden md:block">
                 <div class="flex justify-center">
                     <div class="">
-                        <div class="text-center" style="width: 980px; height: 90px; background: #e2e5e7; color: #424242; line-height: 100px; text-align: center; ">
+                        <div class="text-center rounded" style="width: 980px; height: 90px; background: #e2e5e7; color: #424242; line-height: 100px; text-align: center; ">
                             <p>Ads</p>
                         </div>
                     </div>
@@ -239,7 +239,7 @@
             <div class="block md:hidden">
                 <div class="flex justify-center">
                     <div class="">
-                        <div class="text-center" style="width: 200px; height: 200spx; background: #e2e5e7; color: #424242; line-height: 100px; text-align: center; ">
+                        <div class="text-center rounded" style="width: 200px; height: 200spx; background: #e2e5e7; color: #424242; line-height: 100px; text-align: center; ">
                             <p>Mobile Ads</p>
                         </div>
                     </div>
