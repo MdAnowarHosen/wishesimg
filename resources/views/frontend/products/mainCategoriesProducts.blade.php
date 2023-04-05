@@ -16,5 +16,8 @@
     @endforeach
 </div>
 {{-- images end --}}
+<div class="mt-10">
+    {{ $products->links() }}
+</div>
 </section>
 @endsection
