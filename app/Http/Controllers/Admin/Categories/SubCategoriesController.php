@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Categories\SubCategoryAddRequest;
 use ProtoneMedia\Splade\Facades\SEO;
 use ProtoneMedia\Splade\SpladeTable;
 use App\Models\Categories\Categories;
@@ -34,8 +35,8 @@ class SubCategoriesController extends Controller
 
         $subCategories = QueryBuilder::for(SubCategories::class)
         ->defaultSort('name')
-        ->allowedSorts('name','slug')
-        ->allowedFilters('name','slug','category_id', $globalSearch)
+        ->allowedSorts('name','slug','description')
+        ->allowedFilters('name','slug','category_id','description', $globalSearch)
         ->paginate()
         ->withQueryString();
 
@@ -47,6 +48,7 @@ class SubCategoriesController extends Controller
             ->withGlobalSearch()
             ->column('name', sortable:true,searchable:true)
             ->column('slug', sortable:true,searchable:true)
+            ->column('description', sortable:true,searchable:true)
             ->selectFilter('category_id',$categories)
             ->column('action')
         ]);
@@ -65,18 +67,13 @@ class SubCategoriesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SubCategoryAddRequest $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'slug' => 'required|unique:sub_categories',
-            'category_id' => 'required|numeric',
-        ]);
-
         $create = SubCategories::create([
             'name' => $request->name,
             'slug' => $request->slug,
             'category_id' => $request->category_id,
+            'description' => $request->description
         ]);
 
         if ($create)
@@ -118,12 +115,14 @@ class SubCategoriesController extends Controller
             'name' => 'required|max:255',
             'slug' => "required|unique:sub_categories,slug,$subCategory->id",
             'category_id' => 'required|numeric',
+            'description' => 'nullable|max:256'
         ]);
 
        $update = $subCategory->update([
             'name' => $request->name,
             'slug' => $request->slug,
-            'category_id' => $request->category_id
+            'category_id' => $request->category_id,
+            'description' => $request->description,
         ]);
 
         if ($update)

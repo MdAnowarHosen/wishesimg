@@ -2,14 +2,19 @@
 
 namespace App\Models\Categories;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Products\Product;
+use App\Models\Categories\Categories;
+use Kirschbaum\PowerJoins\PowerJoins;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SubCategories extends Model
 {
     use HasFactory;
+    use PowerJoins;
+
     protected $fillable = [
-        'category_id', 'name', 'slug'
+        'category_id', 'name', 'slug', 'description'
     ];
 
     protected $hidden = [
@@ -19,6 +24,12 @@ class SubCategories extends Model
     protected $casts = [
         'status' => 'bool',
     ];
+
+    // many to many relationship
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'subcat_products','subcategory_id','product_id')->withTimestamps(); //pivot table,
+    }
 
     public function category()
     {

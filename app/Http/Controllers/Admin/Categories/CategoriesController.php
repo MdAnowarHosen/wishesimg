@@ -5,16 +5,13 @@ namespace App\Http\Controllers\Admin\Categories;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Categories\CategoryAddRequest;
 use ProtoneMedia\Splade\Facades\SEO;
 use ProtoneMedia\Splade\SpladeTable;
 use App\Models\Categories\Categories;
 use Spatie\QueryBuilder\QueryBuilder;
-use ProtoneMedia\Splade\AbstractTable;
 use ProtoneMedia\Splade\Facades\Toast;
 use Spatie\QueryBuilder\AllowedFilter;
-use ProtoneMedia\Splade\FormBuilder\Button;
-
-
 
 class CategoriesController extends Controller
 {
@@ -35,8 +32,8 @@ class CategoriesController extends Controller
 
         $categories = QueryBuilder::for(Categories::class)
         ->defaultSort('name')
-        ->allowedSorts('name','slug')
-        ->allowedFilters('name','slug', $globalSearch)
+        ->allowedSorts('name','slug','description')
+        ->allowedFilters('name','slug','description', $globalSearch)
         ->paginate()
         ->withQueryString();
 
@@ -46,6 +43,7 @@ class CategoriesController extends Controller
             ->withGlobalSearch()
             ->column('name', sortable:true,searchable:true)
             ->column('slug', sortable:true,searchable:true)
+            ->column('description', sortable:true,searchable:true)
             ->column('action')
         ]);
     }
@@ -56,16 +54,12 @@ class CategoriesController extends Controller
         return view('admin.categories.add');
     }
 
-    public function store(Request $request)
+    public function store(CategoryAddRequest $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'slug' => 'required|unique:categories',
-        ]);
-
         $create = Categories::create([
             'name' => $request->name,
             'slug' => $request->slug,
+            'description' => $request->description,
         ]);
 
         if ($create)
@@ -98,11 +92,13 @@ class CategoriesController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'slug' => "required|unique:categories,slug,$category->id",
+            'description' => 'nullable|max:256'
         ]);
 
        $update = $category->update([
             'name' => $request->name,
-            'slug' => $request->slug
+            'slug' => $request->slug,
+            'description' => $request->description,
         ]);
 
         if ($update)
