@@ -19,4 +19,11 @@ class CategoryProducts extends Pivot
     ];
 
 
+
+        // many to many relationship
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'category_products','product_id','category_id')->where('status',1)->withTimestamps(); //pivot table, that model id,
+    }
+
 }
