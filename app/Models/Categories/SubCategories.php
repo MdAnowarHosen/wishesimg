@@ -2,6 +2,8 @@
 
 namespace App\Models\Categories;
 
+use App\Models\Products\Product;
+use App\Models\Categories\Categories;
 use Kirschbaum\PowerJoins\PowerJoins;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

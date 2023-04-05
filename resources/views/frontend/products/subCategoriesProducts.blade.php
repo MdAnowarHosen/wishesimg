@@ -3,7 +3,7 @@
 <section>
 {{-- images --}}
 <div class="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-3 gap-4">
-    @foreach ($products->chunk(3) as $chunk)
+    @foreach ($subCatPro->chunk(3) as $chunk)
          <div class="grid gap-4">
             @foreach ($chunk as $product)
             <div>
@@ -16,5 +16,8 @@
     @endforeach
 </div>
 {{-- images end --}}
+<div class="mt-10">
+    {{ $subCatPro->links() }}
+</div>
 </section>
 @endsection

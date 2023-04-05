@@ -32,6 +32,12 @@ class Product extends Model
     }
 
     // many to many relationship
+    public function randCat()
+    {
+        return $this->belongsToMany(Categories::class, 'category_products','product_id','category_id')->inRandomOrder()->take(1)->withTimestamps(); //pivot table, that model id,
+    }
+
+    // many to many relationship
     public function subcategories()
     {
         return $this->belongsToMany(SubCategories::class, 'subcat_products','product_id','subcategory_id')->withTimestamps(); //pivot table, that model id
