@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\Products\ProductsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Frontend\Home\HomeController;
-use App\Http\Controllers\Frontend\Products\ProductsController as FrontendProductsProductsController;
+use App\Http\Controllers\Frontend\Products\ProductsController as FrontendProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +49,7 @@ Route::middleware(['splade'])->group(function () {
         Route::get('/', 'index')->name('/');
     });
 
-    Route::controller(FrontendProductsProductsController::class)->group(function ()
+    Route::controller(FrontendProductsController::class)->group(function ()
     {
         Route::prefix('images')->name('images.')->group(function()
         {
@@ -57,7 +57,6 @@ Route::middleware(['splade'])->group(function () {
             Route::get('/{mainCatSlug}/{subCategorySlug}', 'subCatProducts')->name('subcat.products');
 
         });
-
         Route::get('/{productSlug}', 'show')->name('show.product');
     });
 

@@ -2,12 +2,17 @@
 
 <x-authentication-card>
     <x-slot:logo>
-        <x-authentication-card-logo />
+        {{-- <x-authentication-card-logo/> --}}
+        <div class="mb-5">
+            <h1 class=" text-2xl font-semibold text-gray-700 mb-3">Sign up</h1>
+            <h2 class=" text-lg font-normal text-gray-700">to continue WishesImg</h2>
+        </div>
     </x-slot>
 
     <x-splade-form class="space-y-4">
         <x-splade-input id="name" name="name" :label="__('Name')" required autofocus />
         <x-splade-input id="email" name="email" type="email" :label="__('Email')" required />
+        <x-splade-input id="username" name="username" type="text" :label="__('Username')" required />
         <x-splade-input id="password" name="password" type="password" :label="__('Password')" required autocomplete="new-password" />
         <x-splade-input id="password_confirmation" name="password_confirmation" type="password" :label="__('Confirm Password')" required autocomplete="new-password" />
 
