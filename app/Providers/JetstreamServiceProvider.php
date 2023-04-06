@@ -37,18 +37,16 @@ class JetstreamServiceProvider extends ServiceProvider
 
             $request->validate(
                 [
-                    'email' => 'required | max:255',
+                    "email" => "required | max:255",
                     'password' => 'required | min:8',
-                    'g-recaptcha-response' => 'required | captcha'
                 ],
                 [
-                    'g-recaptcha-response.required' => 'Please verify that you are not a robot.',
-                    'g-recaptcha-response.captcha' => 'Captcha error! Please try again!'
+                    "email.required" => "Please input email or username",
                 ]
             );
 
             $user = User::where('email', $request->email)
-                ->orWhere('username', $request->email)
+                ->orWhere('username', $request->username)
                 ->first();
 
             if (

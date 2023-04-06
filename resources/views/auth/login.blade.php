@@ -14,8 +14,8 @@
         </div>
     @endif
 
-    <x-splade-form class="space-y-4" use="[$rendercap,$display,$ab]">
-        <x-splade-input id="email" name="email" type="email" :label="__('Email')" required autofocus />
+    <x-splade-form class="space-y-4">
+        <x-splade-input id="email" name="email" type="text" :label="__('Email or Username')" required autofocus />
         <x-splade-input id="password" name="password" type="password" :label="__('Password')" required autocomplete="current-password" />
         <x-splade-checkbox name="remember">{{ __('Remember me') }}</x-splade-checkbox>
         <div class="flex items-center justify-end mt-4">
