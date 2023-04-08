@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend\Products;
 use Illuminate\Http\Request;
 use App\Models\Products\Product;
 use App\Http\Controllers\Controller;
+use ProtoneMedia\Splade\Facades\SEO;
 use App\Models\Categories\Categories;
 use App\Models\Categories\SubCategories;
 
@@ -15,6 +16,7 @@ class ProductsController extends Controller
         $product =  Product::whereSlug($productSlug)->firstOrFail();
         $thoseCat = Categories::whereId($product->randCat->first()->id)->first();
         $thoseCatsPro = $thoseCat->products->take(15);
+        SEO::title($product->name);
         return view('frontend.products.product-page',[
             'product' => $product,
             'randProducts' => Product::inRandomOrder()->take(27)->get(),
