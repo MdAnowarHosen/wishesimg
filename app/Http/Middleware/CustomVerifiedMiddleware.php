@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class CustomVerifiedMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +16,11 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->is_admin != true)
+        if (Auth::user()->email_verified_at == null)
         {
             return to_route('/');
         }
+
         return $next($request);
     }
 }

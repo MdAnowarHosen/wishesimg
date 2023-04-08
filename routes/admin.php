@@ -20,6 +20,7 @@ Route::middleware(['splade'])->group(function () {
         'auth',
         config('jetstream.auth_session'),
         'verified',
+        'customVerified',
         'admin'
     ])->prefix('wishes/admin')->name('admin.')->group(function ()
     {
