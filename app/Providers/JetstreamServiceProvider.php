@@ -34,7 +34,6 @@ class JetstreamServiceProvider extends ServiceProvider
         // custom login system start
         Fortify::authenticateUsing(function (Request $request)
         {
-
             $request->validate(
                 [
                     "email" => "required | max:255",
@@ -44,9 +43,8 @@ class JetstreamServiceProvider extends ServiceProvider
                     "email.required" => "Please input email or username",
                 ]
             );
-
             $user = User::where('email', $request->email)
-                ->orWhere('username', $request->username)
+                ->orWhere('username', ucfirst($request->email))
                 ->first();
 
             if (
@@ -56,10 +54,7 @@ class JetstreamServiceProvider extends ServiceProvider
             {
                 return $user;
             }
-
-
         });
-
         // custom login system start end
 
 

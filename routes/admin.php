@@ -50,5 +50,6 @@ Route::middleware(['splade'])->group(function () {
         Route::get('products/{product}/get/subcategory/{category}',[ProductsController::class,'getSubCategoryEdit'])->name('get.subcategory.edit');
 
 
+
     });
 });
