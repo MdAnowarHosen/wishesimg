@@ -8,9 +8,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
     @spladeHead
     @vite('resources/js/app.js')
-    <x-splade-script>
-    <script src="https://kit.fontawesome.com/45ee9bbd89.js" crossorigin="anonymous"></script>
-</x-splade-script>
 </head>
 <body>
     {{-- main section start --}}
@@ -117,30 +114,58 @@
                       </Link>
                    </li>
 
-                   @foreach ($boot_categories as $category)
+
+
+
+
+
+                   {{-- @foreach ($boot_categories as $category)
                    @if ($category->ActivatedSubCategories != null && isset($category->ActivatedSubCategories) && count($category->ActivatedSubCategories)>0)
+
                    <li>
-                    <x-splade-toggle>
-                    <button @click="toggle" type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+
+                    <button aria-controls="{{ $category->slug }}" data-collapse-toggle="{{ $category->slug }}" type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                           <x-bi-folder class="w-5 h-5"/>
                           <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ $category->name }}</span>
                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
 
-                    <ul v-show="toggled" class="py-2 space-y-2">
+                    <ul id="{{ $category->slug }}" class=" hidden py-2 space-y-2">
                         @foreach ($category->ActivatedSubCategories as $subCat)
                         <li>
-                            <Link href="{{ route('images.subcat.products',['mainCatSlug'=>$category->slug, 'subCategorySlug'=>$subCat->slug]) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> {{ $subCat->name }}</Link>
+                            <Link href="{{ route('images.subcat.products',['mainCatSlug'=>$category->slug, 'subCategorySlug'=>$subCat->slug]) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2 inline"/> <span class=" inline"> {{ $subCat->name }}</span></Link>
                          </li>
                         @endforeach
                   </ul>
-                </x-splade-toggle>
+
                 </li>
                 @endif
-                   @endforeach
+                   @endforeach --}}
 
 
+                   @foreach ($boot_categories as $category)
+                   @if ($category->ActivatedSubCategories != null && isset($category->ActivatedSubCategories) && count($category->ActivatedSubCategories)>0)
+                   <li>
+                    <button type="button" aria-controls="{{ $category->slug }}" data-collapse-toggle="{{ $category->slug }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                        <x-bi-folder class="w-5 h-5"/>
+                          <span class="flex-1 ml-1 text-left whitespace-nowrap" sidebar-toggle-item>{{ $category->name }}</span>
+                          <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    </button>
 
+                    <ul id="{{ $category->slug }}" class="hidden py-2 space-y-1 pl-5">
+                          @foreach ($category->ActivatedSubCategories as $subCat)
+                          <li>
+
+                             <Link href="{{ route('images.subcat.products',['mainCatSlug'=>$category->slug, 'subCategorySlug'=>$subCat->slug]) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"> <x-bi-folder2-open class="w-5 h-5 mr-2 inline"/> {{ $subCat->name }}</Link>
+
+
+                          </li>
+                         @endforeach
+
+                    </ul>
+                 </li>
+                 @endif
+                 @endforeach
 
 
                    <li>
@@ -169,6 +194,7 @@
                     </a>
                  </li>
                 </ul>
+
              </div>
           </aside>
 
@@ -177,7 +203,7 @@
                 <div class="grid grid-cols-12 gap-3">
                     <div class="col-span-12 md:col-span-9">
                         <div class="">
-                                                                                                                                                                                        @splade
+                            @splade
                         </div>
                     </div>
                     {{-- ad section --}}
