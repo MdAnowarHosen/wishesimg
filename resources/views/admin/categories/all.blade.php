@@ -1,7 +1,7 @@
 <section>
     <x-splade-table :for="$categories">
         @cell('action', $category)
-        <Link href="{{ route('admin.category.edit',['category'=>$category->id]) }}"><x-tabler-eye class="w-6 h-6 inline mx-2" /></Link>
+        <Link href="{{ route('admin.category.edit',['category'=>$category->id]) }}"><x-tabler-edit class="w-6 h-6 inline mx-2" /></Link>
         <Link href="{{ route('admin.category.delete',['category'=>$category->id]) }}"
         method="delete"
         confirm="Delete"
