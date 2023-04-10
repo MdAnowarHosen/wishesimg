@@ -1,5 +1,3 @@
-@extends('layouts.adminLayout')
-@section('content')
 <section class="">
     <div class="container mx-auto px-4">
       <nav class="flex">
@@ -149,5 +147,3 @@
       </div>
     </div>
   </section>
-
-@endsection

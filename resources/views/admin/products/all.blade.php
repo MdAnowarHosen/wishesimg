@@ -1,5 +1,3 @@
-@extends('layouts.adminLayout')
-@section('content')
 <section>
     <x-splade-table :for="$products" as="$product" search-debounce="1000">
         @cell('id', $product)
@@ -22,4 +20,4 @@
         @endcell
     </x-splade-table>
 </section>
-@endsection
+

@@ -1,5 +1,3 @@
-@extends('layouts.frontendLayout')
-@section('content')
 <section>
 {{-- images --}}
 <div class="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-3 gap-4">
@@ -17,4 +15,4 @@
 </div>
 {{-- images end --}}
 </section>
-@endsection
+

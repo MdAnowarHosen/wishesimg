@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WishesImg</title>
-    @spladeHead
-    @vite(['resources/css/app.css','resources/js/app.js'])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
+    @spladeHead
+    @vite('resources/js/app.js')
     <style>
     .filepond--credits {
     display: none;
@@ -80,55 +80,54 @@
                       </a>
                    </li>
                    <li>
-                    <x-splade-toggle>
-                    <button  @click="toggle" type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+
+                    <button aria-controls="categories" data-collapse-toggle="categories"  type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                           <x-bi-folder class="w-5 h-5"/>
                           <span class="flex-1 ml-3 text-left whitespace-nowrap">Categories</span>
                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
-                    <ul v-show="toggled" class="py-2 space-y-2">
+                    <ul id="categories" class="hidden py-2 space-y-2">
                           <li>
-                             <Link href="{{ route('admin.categories') }}"  class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> All Categories</Link>
+                             <a href="{{ route('admin.categories') }}"  class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> All Categories</a>
                           </li>
                           <li>
-                            <Link href="{{ route('admin.categories.add') }}"  class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> Add Category</Link>
+                            <a href="{{ route('admin.categories.add') }}"  class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> Add Category</a>
                          </li>
                     </ul>
-                    </x-splade-toggle>
+
                 </li>
                 <li>
-                    <x-splade-toggle>
-                    <button @click="toggle" type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+
+                    <button  type="button" aria-controls="subcategories" data-collapse-toggle="subcategories" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                           <x-bi-folder class="w-5 h-5"/>
                           <span class="flex-1 ml-3 text-left whitespace-nowrap">Sub Categories</span>
                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
-                    <ul v-show="toggled" class="py-2 space-y-2">
+                    <ul id="subcategories"  class="hidden py-2 space-y-2">
                           <li>
-                             <Link href="{{ route('admin.sub-categories.index') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> All Sub Categories</Link>
+                             <a href="{{ route('admin.sub-categories.index') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> All Sub Categories</a>
                           </li>
                           <li>
-                            <Link href="{{ route('admin.sub-category.create') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> Add Sub Category</Link>
+                            <a href="{{ route('admin.sub-category.create') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> Add Sub Category</a>
                          </li>
                     </ul>
-                </x-splade-toggle>
+
                 </li>
                 <li>
-                     <x-splade-toggle>
-                    <button type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" @click="toggle">
+
+                    <button type="button" aria-controls="products" data-collapse-toggle="products" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700" @click="toggle">
                           <x-fab-product-hunt class="w-5 h-5"/>
                           <span class="flex-1 ml-3 text-left whitespace-nowrap">Products</span>
                           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
-                    <ul v-show="toggled" class="py-2 space-y-2">
+                    <ul id="products" class=" hidden py-2 space-y-2">
                           <li>
-                             <Link href="{{ route('admin.products.index') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> All Products</Link>
-                          </li>
+                             <a prevent  href="{{ route('admin.products.index') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <x-bi-folder2-open class="w-5 h-5 mr-2"/> All Products</a>
+                            </li>
                           <li>
-                            <Link href="{{ route('admin.products.create') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> Add Product</Link>
+                            <a href="{{ route('admin.products.create') }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2"/> Add Product</a>
                          </li>
                     </ul>
-                     </x-splade-toggle>
                 </li>
                    <li>
                       <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
@@ -167,20 +166,7 @@
 
           <div class="p-4 sm:ml-64">
              <div class="p-4 mt-14">
-                {{-- <div class="grid grid-cols-12 gap-3">
-                    <div class="col-span-12 md:col-span-9">
-                        <div class="">
-                            @yield('content')
-                        </div>
-                    </div>
-
-                    <div class="col-span-12 md:col-span-3">
-                        <div class="">
-
-                        </div>
-                    </div>
-                </div> --}}
-                @yield('content')
+               @splade
              </div>
           </div>
           {{-- floating action button --}}

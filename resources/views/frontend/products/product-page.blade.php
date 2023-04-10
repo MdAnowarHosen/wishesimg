@@ -1,8 +1,6 @@
-@extends('layouts.frontendLayout')
-@section('content')
+
 <section>
 {{-- images --}}
-<div>
     <div class="grid grid-cols-12 gap-5">
         <div class="col-span-12 md:col-span-8">
             <div class="">
@@ -10,7 +8,8 @@
                      {{-- Mobile Download button --}}
                     <div class="mt-5 mb-3 block md:hidden">
                             <button type="button" data-modal-target="download-modal" data-modal-toggle="download-modal" class=" w-full bg-green-600 rounded-full  text-gray-100 text-center py-1 font-semibold">
-                            <x-bi-download width="50" height="20" class="block mx-auto" /> Free Download
+                            <x-eos-download width="50" height="30" class="block mx-auto" />
+                            Free Download
                             </button>
                     </div>
                     <img class=" block mx-auto rounded-lg" style="max-height: 600px;"
@@ -57,7 +56,7 @@
                     <h1 class=" font-semibold text-lg text-gray-800">{{ $product->name }}</h1>
                 </div>
                 {{-- image name end --}}
-            <div class="mx-3 mt-5">
+            {{-- <div class="mx-3 mt-5">
                 <div class=" flex justify-between">
                     <a href="#" >
                         <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700">
@@ -77,28 +76,17 @@
                         </div>
                     </a>
                 </div>
-              </div>
+              </div> --}}
 
               {{-- Download button --}}
               <div class="mt-5">
                 <div class=" cursor-pointer" data-modal-target="download-modal" data-modal-toggle="download-modal">
                     <button type="button" class=" bg-green-600 rounded-lg  text-gray-100 text-center py-1 font-semibold w-full">
-                     <x-bi-download width="50" height="20" class="block mx-auto" /> Free Download
+                     <x-eos-download width="50" height="40" class="block mx-auto" />
+                     Free Download
                     </button>
-                </a>
-              </div>
-              {{-- ad --}}
-              {{-- <div class="mt-3">
-                <a href="#">
-                    <img src="https://flowbite.s3.amazonaws.com/docs/gallery/masonry/image.jpg" alt="">
-                </a>
-              </div> --}}
-              {{-- <div class="mt-2 md:mr-1">
-                <div style="width: 250px; height: 250px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
-                    Ad
-                </div>
-            </div> --}}
 
+              </div>
             <div class="mt-3 mb-1">
                 <div class="rounded" style="width: 250px; height: 250px; background: #e2e5e7; color: #424242; line-height: 250px; text-align: center; ">
                     Ads
@@ -176,4 +164,3 @@
 </div>
 {{-- images end --}}
 </section>
-@endsection
