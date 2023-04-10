@@ -52,6 +52,6 @@ Route::middleware(['splade'])->group(function () {
     // });
 
     Route::get('/test',function(){
-        return view('test.test');
+       // return view('test.test');
     });
 });
