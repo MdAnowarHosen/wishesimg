@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>WishesImg</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
     @spladeHead
     @vite('resources/js/app.js')
@@ -86,17 +85,19 @@
                             <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
                           </li>
                           <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
+
+                            <Link method="post" href="route('logout')" class=" cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</Link>
                           </li>
                           <li>
-                              <!-- Authentication -->
-                              <x-splade-form :action="route('logout')">
-                                <x-dropdown-link as="button">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link>
-                            </x-splade-form>
+
                           </li>
                         </ul>
+                         <!-- Authentication -->
+                         <x-splade-form :action="route('logout')">
+                            <x-dropdown-link as="button">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </x-splade-form>
                       </div>
                     </div>
                   </div>
