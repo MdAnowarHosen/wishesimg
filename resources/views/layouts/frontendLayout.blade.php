@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WishesImg</title>
-    @vite(['resources/css/app.css','resources/js/app.js'])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
+    @spladeHead
+    @vite('resources/js/app.js')
+    <x-splade-script>
+    <script src="https://kit.fontawesome.com/45ee9bbd89.js" crossorigin="anonymous"></script>
+</x-splade-script>
 </head>
 <body>
     {{-- main section start --}}
@@ -172,7 +176,7 @@
                 <div class="grid grid-cols-12 gap-3">
                     <div class="col-span-12 md:col-span-9">
                         <div class="">
-                            @yield('content')
+                                                                                                                                                                                        @splade
                         </div>
                     </div>
                     {{-- ad section --}}
