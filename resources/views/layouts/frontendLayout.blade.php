@@ -116,6 +116,7 @@
                          <span class="ml-3">Home</span>
                       </Link>
                    </li>
+
                    @foreach ($boot_categories as $category)
                    @if ($category->ActivatedSubCategories != null && isset($category->ActivatedSubCategories) && count($category->ActivatedSubCategories)>0)
                    <li>
