@@ -1,5 +1,3 @@
-@extends('layouts.adminLayout')
-@section('content')
 <section>
     <x-splade-table :for="$subCategories">
         @cell('action', $subCategory)
@@ -13,4 +11,4 @@
         @endcell
     </x-splade-table>
 </section>
-@endsection
+
