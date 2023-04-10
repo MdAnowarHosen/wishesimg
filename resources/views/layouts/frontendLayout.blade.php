@@ -108,40 +108,10 @@
              <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                 <ul class="space-y-2">
                    <li>
-                      <Link href="{{ route('/') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <x-entypo-home class="w-5 h-5 text-gray-600" />
-                         <span class="ml-3">Home</span>
-                      </Link>
+                      <a href="{{ route('/') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <x-entypo-home class="w-5 h-5 text-gray-600 inline" /> <span class="ml-3 inline">Home</span>
+                      </a>
                    </li>
-
-
-
-
-
-
-                   {{-- @foreach ($boot_categories as $category)
-                   @if ($category->ActivatedSubCategories != null && isset($category->ActivatedSubCategories) && count($category->ActivatedSubCategories)>0)
-
-                   <li>
-
-                    <button aria-controls="{{ $category->slug }}" data-collapse-toggle="{{ $category->slug }}" type="button" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
-                          <x-bi-folder class="w-5 h-5"/>
-                          <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ $category->name }}</span>
-                          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-
-                    <ul id="{{ $category->slug }}" class=" hidden py-2 space-y-2">
-                        @foreach ($category->ActivatedSubCategories as $subCat)
-                        <li>
-                            <Link href="{{ route('images.subcat.products',['mainCatSlug'=>$category->slug, 'subCategorySlug'=>$subCat->slug]) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-10 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"><x-bi-folder2-open class="w-5 h-5 mr-2 inline"/> <span class=" inline"> {{ $subCat->name }}</span></Link>
-                         </li>
-                        @endforeach
-                  </ul>
-
-                </li>
-                @endif
-                   @endforeach --}}
-
 
                    @foreach ($boot_categories as $category)
                    @if ($category->ActivatedSubCategories != null && isset($category->ActivatedSubCategories) && count($category->ActivatedSubCategories)>0)
@@ -152,13 +122,10 @@
                           <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                     </button>
 
-                    <ul id="{{ $category->slug }}" class="hidden py-2 space-y-1 pl-5">
+                    <ul id="{{ $category->slug }}" class="hidden py-2 space-y-1">
                           @foreach ($category->ActivatedSubCategories as $subCat)
                           <li>
-
-                             <Link href="{{ route('images.subcat.products',['mainCatSlug'=>$category->slug, 'subCategorySlug'=>$subCat->slug]) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-300 dark:text-white dark:hover:bg-gray-700"> <x-bi-folder2-open class="w-5 h-5 mr-2 inline"/> {{ $subCat->name }}</Link>
-
-
+                             <a href="{{ route('images.subcat.products',['mainCatSlug'=>$category->slug, 'subCategorySlug'=>$subCat->slug]) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <x-bi-folder2-open class="w-5 h-5 mr-2"/> {{ $subCat->name }}</a>
                           </li>
                          @endforeach
 
