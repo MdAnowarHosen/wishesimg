@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\Download\DownloadController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Frontend\Home\HomeController;
@@ -28,6 +29,13 @@ Route::middleware(['splade'])->group(function () {
 
         });
         Route::get('/{productSlug}', 'show')->name('show.product');
+    });
+
+    Route::controller(DownloadController::class)->prefix('download')->name('download.')->group(function ()
+    {
+        Route::post('/{slug}', 'downloadPost')->name('post.req');
+        Route::get('/high/{slug}', 'downloadHigh')->name('high');
+     ;
     });
 
 });

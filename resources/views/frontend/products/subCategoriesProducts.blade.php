@@ -1,4 +1,7 @@
 <section>
+    <div class="bg-slate-100 py-5 rounded-full text-center mb-3">
+        <h1 class=" text-lg font-semibold">{{ $subCategory }}</h1>
+    </div>
 {{-- images --}}
 <div class="grid grid-cols-2 lg:grid-cols-3 md:grid-cols-3 gap-4">
     @foreach ($subCatPro->chunk(3) as $chunk)
