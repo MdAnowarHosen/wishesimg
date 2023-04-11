@@ -116,7 +116,7 @@
                    </li>
 
                    @foreach ($boot_categories as $category)
-                   @if ($category->ActivatedSubCategories != null && isset($category->ActivatedSubCategories) && count($category->ActivatedSubCategories)>0)
+                   @if ($category->activatedSubCatsAsc != null && isset($category->activatedSubCatsAsc) && count($category->activatedSubCatsAsc)>0)
                    <li>
                     <button type="button" aria-controls="{{ $category->slug }}" data-collapse-toggle="{{ $category->slug }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                         <x-bi-folder class="w-5 h-5"/>
@@ -125,7 +125,7 @@
                     </button>
 
                     <ul id="{{ $category->slug }}" class="hidden py-2 space-y-1">
-                          @foreach ($category->ActivatedSubCategories as $subCat)
+                          @foreach ($category->activatedSubCatsAsc as $subCat)
                           <li>
                              <a href="{{ route('images.subcat.products',['mainCatSlug'=>$category->slug, 'subCategorySlug'=>$subCat->slug]) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <x-bi-folder2-open class="w-5 h-5 mr-2"/> {{ $subCat->name }}</a>
                           </li>

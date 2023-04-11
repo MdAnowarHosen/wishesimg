@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
 
-        $boot_categories = Categories::whereStatus(1)->get();
+        $boot_categories = Categories::whereStatus(1)->orderBy('name','asc')->get();
         $rightSideRandProduct = Product::whereStatus(1)->inRandomOrder()->take(6)->get();
 
         view()->share('boot_categories', $boot_categories);
