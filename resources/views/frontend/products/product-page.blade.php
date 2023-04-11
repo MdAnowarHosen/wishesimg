@@ -12,15 +12,6 @@
                             Free Download
                             </div>
                     </Link>
-
-                    {{-- <Link href="#download_modal" class=" cursor-pointer">
-                        <div class=" bg-green-600 rounded-lg  text-gray-100 text-center py-1 font-semibold w-full">
-                         <x-eos-download width="50" height="40" class="block mx-auto" />
-                         Free Download
-                        </div>
-                  </Link> --}}
-
-
                     <img class=" block mx-auto rounded-lg" style="max-height: 600px;"
                     src="{{ Storage::disk('wishes')->url('wishesFiles/product/low/'.$product->low_quality) }}"
                     alt="{{ $product->name }}">
@@ -129,32 +120,47 @@
         {{-- more images end --}}
         </div>
          {{-- Download Modal Start --}}
-         <x-splade-modal name="download_modal" slideover max-width="lg" class="z-40">
-            <div class="px-6 py-6 lg:px-8  bg-slate-800 z-40">
+         <x-splade-modal name="download_modal" slideover max-width="lg" class="z-40" >
+            <div class="px-6 py-6 lg:px-8 bg-slate-800 z-40 rounded-lg ">
                 <h3 class="mb-4 text-xl text-gray-300 font-bold dark:text-white">Select Image Quality</h3>
-                <form class="space-y-6" action="#">
+                <form class="space-y-6" action="{{ route('download.post.req',$product->slug) }}" method="post">
+                    @csrf
                 <ul class="w-full text-sm font-medium text-gray-900 border border-gray-700 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                     <li class="w-full border-b border-gray-700 rounded-t-lg dark:border-gray-600">
                         <div class="flex items-center pl-3">
-                            <input id="list-radio-license" type="radio" value="low" name="imageQuality" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                            <input id="list-radio-license" type="radio" value="1" name="img_ql" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                             <label for="list-radio-license" class="w-full py-3 ml-2 text-sm font-medium text-gray-200 dark:text-gray-300">Low Quality</label>
                         </div>
                     </li>
                     <li class="w-full border-b border-gray-700 rounded-t-lg dark:border-gray-600">
                         <div class="flex items-center pl-3">
-                            <input id="list-radio-millitary" type="radio" value="medium" name="imageQuality" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                            <input id="list-radio-millitary" type="radio" value="2" name="img_ql" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                             <label for="list-radio-millitary" class="w-full py-3 ml-2 text-sm font-medium text-gray-200 dark:text-gray-300">Medium Quality</label>
                         </div>
                     </li>
                     <li class="w-full border-b border-gray-700 rounded-t-lg dark:border-gray-600">
                         <div class="flex items-center pl-3">
-                            <input id="list-radio-passport" type="radio" value="high" name="imageQuality" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                            <label for="list-radio-passport" class="w-full py-3 ml-2 text-sm font-medium text-gray-200 dark:text-gray-300">High Quality <span class=" text-xs text-gray-400 font-semibold">( Login required )</span></label>
+                            <input id="list-radio-passport" type="radio" value="3" name="img_ql" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                            <label for="list-radio-passport" class="w-full py-3 ml-2 text-sm font-medium text-gray-200 dark:text-gray-300">High Quality</label>
                         </div>
                     </li>
                 </ul>
                 <button type="submit" class=" bg-slate-900 w-full py-3 rounded-full text-gray-300 font-bold">Download</button>
                 </form>
+
+                {{-- <x-splade-form action="{{ route('download.post.req',$product->slug) }}" >
+                    <label for="img_ql" class=" text-xl text-gray-300 font-bold dark:text-white">Select Image Quality *</label>
+                    <x-splade-group name="img_ql" class="mt-4 w-full text-sm font-medium text-gray-300 border border-gray-700 rounded-lg dark:bg-gray-500 dark:border-gray-600 dark:text-white py-2">
+                        <x-splade-radio name="img_ql" value="1" label="Low Quality" class="w-full border-b  border-gray-600 py-2 pl-3"  required/>
+                        <x-splade-radio name="img_ql" value="2" label="Medium Quality" class="w-full border-b border-gray-600 py-2 pl-3" required/>
+                        <x-splade-radio name="img_ql" value="3" label="High Quality" class="w-full py-2 pl-3" required/>
+                    </x-splade-group>
+                    <button type="submit" @click="download(form)" class=" bg-slate-900 w-full py-3 rounded-full text-gray-300 font-bold mt-4">Download</button>
+                </x-splade-form> --}}
+
+
+
+
             </div>
         </x-splade-modal>
 
@@ -165,3 +171,11 @@
 </div>
 {{-- images end --}}
 </section>
+
+@push('scripts')
+<x-splade-script>
+    function download(form){
+        console.log('ok');
+    }
+</x-splade-script>
+@endpush

@@ -316,5 +316,6 @@
            </div>
          {{-- bottom sticky ads end --}}
     </section>
+    @stack('scripts')
 </body>
 </html>
