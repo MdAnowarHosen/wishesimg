@@ -149,46 +149,37 @@ class ProductsController extends Controller
         try {
             $files = array();
             $image = $request->file('file');
-            $interventionImage = Image::make($image);
+            $watermark = Image::make('img/watermark.png');
 
+            $thumbNailQuality = Image::make($image);
             $thumbnail =  Str::random(25).$image->hashName();
-            Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $interventionImage->encode('jpg', 13));
+            Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $thumbNailQuality->encode('jpg', 13));
             $files['thumbnail'] = $thumbnail;
+            $thumbNailQuality = null;
 
 
             // low product image
+            $lowQuality = Image::make($image);
             $low_image_name =  Str::random(25).$image->hashName();
-            //image manipulation
-          //  $interventionImage = Image::make($image);
-           // $interventionImage->resize(1000, 850); // width x height
-
-            // create a new Image instance for inserting
-            // $watermark = Image::make('backend/img/watermark_pattern_file.png');
-            // $interventionImage->insert($watermark, 'center');
-
-            Storage::disk('wishes')->put("product/low/" . $low_image_name, (string) $interventionImage->encode('jpg', 40));
+            $lowQuality->insert($watermark, 'bottom-right');
+            Storage::disk('wishes')->put("product/low/" . $low_image_name, (string) $lowQuality->encode('jpg', 40));
             $files['low_quality'] = $low_image_name;
+            $lowQuality = null;
 
             // medium product image
+            $mediumQuality = Image::make($image);
             $medium_image_name =  Str::random(25).$image->hashName();
-            //image manipulation
-           // $interventionImage = Image::make($image);
-           // $interventionImage->resize(1000, 850); // width x height
-
-            // create a new Image instance for inserting
-            // $watermark = Image::make('backend/img/watermark_pattern_file.png');
-            // $interventionImage->insert($watermark, 'center');
-
-            Storage::disk('wishes')->put("product/medium/" . $medium_image_name, (string) $interventionImage->encode('jpg', 60));
+            $mediumQuality->insert($watermark, 'bottom-right');
+            Storage::disk('wishes')->put("product/medium/" . $medium_image_name, (string) $mediumQuality->encode('jpg', 60));
             $files['medium_quality'] = $medium_image_name;
+            $mediumQuality = null;
 
             // high product image
+            $highQuality = Image::make($image);
             $high_image_name =  Str::random(25).$image->hashName();
-            //image manipulation
-          //  $interventionImage = Image::make($image);
-            Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $interventionImage->encode('jpg', 90));
+            Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $highQuality->encode('jpg', 90));
             $files['high_quality'] = $high_image_name;
-
+            $highQuality = null;
 
             // product info
             $info = [
@@ -270,6 +261,7 @@ class ProductsController extends Controller
      */
     public function update(AddProductRequest $request, Product $product)
     {
+        HandleSpladeFileUploads::forRequest($request);
 
         $old = $product;
         $info = array();
@@ -300,44 +292,38 @@ class ProductsController extends Controller
 
         if ($image != null)
         {
+        $watermark = Image::make('img/watermark.png');
 
-        $interventionImage = Image::make($image);
-
+        $thumbNailQuality = Image::make($image);
         $thumbnail =  Str::random(25).$image->hashName();
-        Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $interventionImage->encode('jpg', 13));
+        Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $thumbNailQuality->encode('jpg', 13));
         $files['thumbnail'] = $thumbnail;
+        $thumbNailQuality = null;
 
 
         // low product image
+        $lowQuality = Image::make($image);
         $low_image_name =  Str::random(25).$image->hashName();
-        //image manipulation
-        //  $interventionImage = Image::make($image);
-        // $interventionImage->resize(1000, 850); // width x height
-
-        // create a new Image instance for inserting
-        // $watermark = Image::make('backend/img/watermark_pattern_file.png');
-        // $interventionImage->insert($watermark, 'center');
-
-        Storage::disk('wishes')->put("product/low/" . $low_image_name, (string) $interventionImage->encode('jpg', 40));
+        $lowQuality->insert($watermark, 'bottom-right');
+        Storage::disk('wishes')->put("product/low/" . $low_image_name, (string) $lowQuality->encode('jpg', 40));
         $files['low_quality'] = $low_image_name;
-        // medium product image
-        $medium_image_name =  Str::random(25).$image->hashName();
-        //image manipulation
-        // $interventionImage = Image::make($image);
-        // $interventionImage->resize(1000, 850); // width x height
-        // create a new Image instance for inserting
-        // $watermark = Image::make('backend/img/watermark_pattern_file.png');
-        // $interventionImage->insert($watermark, 'center');
+        $lowQuality = null;
 
-       Storage::disk('wishes')->put("product/medium/" . $medium_image_name, (string) $interventionImage->encode('jpg', 60));
+
+        // medium product image
+        $mediumQuality = Image::make($image);
+        $medium_image_name =  Str::random(25).$image->hashName();
+        $mediumQuality->insert($watermark, 'bottom-right');
+        Storage::disk('wishes')->put("product/medium/" . $medium_image_name, (string) $mediumQuality->encode('jpg', 60));
         $files['medium_quality'] = $medium_image_name;
+        $mediumQuality = null;
 
         // high product image
+        $highQuality = Image::make($image);
         $high_image_name =  Str::random(25).$image->hashName();
-        //image manipulation
-        //  $interventionImage = Image::make($image);
-        Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $interventionImage->encode('jpg', 90));
+        Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $highQuality->encode('jpg', 90));
         $files['high_quality'] = $high_image_name;
+        $highQuality = null;
         }
 
         DB::beginTransaction();
@@ -347,8 +333,6 @@ class ProductsController extends Controller
             $update = Product::whereId($product->id)->update($data);
             if ($update)
             {
-
-
                 /**
                  * check category added or removed or not! if added or removed
                  * then make the change to database
