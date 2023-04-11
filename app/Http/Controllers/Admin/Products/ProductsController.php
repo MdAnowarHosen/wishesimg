@@ -152,7 +152,7 @@ class ProductsController extends Controller
             $interventionImage = Image::make($image);
 
             $thumbnail =  Str::random(25).$image->hashName();
-            Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $interventionImage->encode('jpg', 15));
+            Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $interventionImage->encode('jpg', 13));
             $files['thumbnail'] = $thumbnail;
 
 
@@ -186,7 +186,7 @@ class ProductsController extends Controller
             $high_image_name =  Str::random(25).$image->hashName();
             //image manipulation
           //  $interventionImage = Image::make($image);
-            Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $interventionImage->encode('jpg', 85));
+            Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $interventionImage->encode('jpg', 90));
             $files['high_quality'] = $high_image_name;
 
 
@@ -304,7 +304,7 @@ class ProductsController extends Controller
         $interventionImage = Image::make($image);
 
         $thumbnail =  Str::random(25).$image->hashName();
-        Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $interventionImage->encode('jpg', 15));
+        Storage::disk('wishes')->put("product/thumbnail/" . $thumbnail, (string) $interventionImage->encode('jpg', 13));
         $files['thumbnail'] = $thumbnail;
 
 
@@ -336,7 +336,7 @@ class ProductsController extends Controller
         $high_image_name =  Str::random(25).$image->hashName();
         //image manipulation
         //  $interventionImage = Image::make($image);
-        Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $interventionImage->encode('jpg', 85));
+        Storage::disk('wishes')->put("product/high/" . $high_image_name, (string) $interventionImage->encode('jpg', 90));
         $files['high_quality'] = $high_image_name;
         }
 

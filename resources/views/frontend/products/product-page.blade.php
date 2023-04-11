@@ -147,7 +147,6 @@
                 </ul>
                 <button type="submit" class=" bg-slate-900 w-full py-3 rounded-full text-gray-300 font-bold">Download</button>
                 </form>
-
                 {{-- <x-splade-form action="{{ route('download.post.req',$product->slug) }}" >
                     <label for="img_ql" class=" text-xl text-gray-300 font-bold dark:text-white">Select Image Quality *</label>
                     <x-splade-group name="img_ql" class="mt-4 w-full text-sm font-medium text-gray-300 border border-gray-700 rounded-lg dark:bg-gray-500 dark:border-gray-600 dark:text-white py-2">
@@ -157,14 +156,8 @@
                     </x-splade-group>
                     <button type="submit" @click="download(form)" class=" bg-slate-900 w-full py-3 rounded-full text-gray-300 font-bold mt-4">Download</button>
                 </x-splade-form> --}}
-
-
-
-
             </div>
         </x-splade-modal>
-
-
          {{-- Download Modal End --}}
     </div>
     </div>
