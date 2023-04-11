@@ -30,6 +30,7 @@ class ProductsController extends Controller
         $products = $category->products->paginate(90);
         return view('frontend.products.mainCategoriesProducts',[
             'products' => $products,
+            'category' => $category->name,
         ]);
 
     }
@@ -41,6 +42,7 @@ class ProductsController extends Controller
         $subCatPro = $subCategory->products->paginate(90);
         return view('frontend.products.subCategoriesProducts',[
             'subCatPro' => $subCatPro,
+            'subCategory' => $subCategory->name,
         ]);
 
     }
