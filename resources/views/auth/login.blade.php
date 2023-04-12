@@ -79,6 +79,12 @@
         </button>
       </div>
     </form>
+    <div class="text-center mt-8">
+        <p class=" text-lg font-bold">Don't have an account?</p>
+        <a href="{{ route('register') }}" class="mt-5 block w-full rounded-full py-3 bg-gray-700 text-white font-bold shadow-md shadow-gray-500/50">
+            Register a new account
+        </a>
+    </div>
 </x-authentication-card>
 
 

@@ -58,50 +58,61 @@
                             </div>
                         </form>
                 </div>
+
                 <div class="flex items-center">
                     <div class="flex items-center">
                       <div>
-                        <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                        <button type="button" class="flex text-sm bg-gray-300 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                           <span class="sr-only">Open user menu</span>
-                          <img class="md:w-11 w-14 h-9 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                          <img class="md:w-11 w-14 h-9 rounded-full"
+                          @auth
+                          src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}"
+                          @else
+                            src="{{ asset('img/user.png') }}" alt="User profile picture"
+                          @endauth>
                         </button>
                       </div>
-                      <div class="z-30 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
-                        <div class="px-4 py-3" role="none">
+
+                      <div class="z-30 px-8 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
+                        @auth
+                        <div class="py-3" role="none">
                           <p class="text-sm text-gray-900 dark:text-white" role="none">
-                            Neil Sims
+                            {{ Auth::user()->name }}
                           </p>
                           <p class="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                            neil.sims@flowbite.com
+                            {{ Auth::user()->email }}
                           </p>
                         </div>
+                        @endauth
                         <ul class="py-1" role="none">
+                        @auth
                           <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Dashboard</a>
+                                <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
                           </li>
                           <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Settings</a>
-                          </li>
-                          <li>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Earnings</a>
-                          </li>
-                          <li>
-
-                            <Link method="post" href="route('logout')" class=" cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</Link>
-                          </li>
-                          <li>
-
-                          </li>
+                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
+                                Log out
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                @csrf
+                                </form>
+                            </li>
+                        @else
+                        <li>
+                            <a href="{{ route('login') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Login</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('register') }}"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Register</a>
+                        </li>
+                        @endauth
                         </ul>
-                         <!-- Authentication -->
-                         <x-splade-form :action="route('logout')">
-                            <x-dropdown-link as="button">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </x-splade-form>
                       </div>
+
                     </div>
                   </div>
+
+
               </div>
             </div>
           </nav>
@@ -136,14 +147,14 @@
                  @endif
                  @endforeach
 
-                 @guest
+                 {{-- @guest
                  <li>
                     <a  href="{{ route('login') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                       <svg aria-hidden="true" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd"></path></svg>
                        <span class="flex-1 ml-3 whitespace-nowrap">Sign In</span>
                     </a>
                  </li>
-                 @endguest
+                 @endguest --}}
 
                    {{-- <li>
                       <a href="#" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">

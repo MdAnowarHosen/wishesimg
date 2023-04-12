@@ -119,7 +119,7 @@
             </div>
         </label>
     </div>
-@endif
+    @endif
 
 
       <div>
@@ -128,5 +128,12 @@
         </button>
       </div>
     </form>
+
+    <div class="text-center mt-8">
+        <p class=" text-lg font-bold">Already have an account?</p>
+        <a href="{{ route('login') }}" class="mt-5 block w-full rounded-full py-3 bg-gray-700 text-white font-bold shadow-md shadow-gray-500/50">
+            Login your account
+        </a>
+    </div>
 
 </x-authentication-card>
