@@ -2,7 +2,7 @@
 
 <x-authentication-card>
     <x-slot:logo>
-        <x-authentication-card-logo />
+        {{-- <x-authentication-card-logo /> --}}
     </x-slot>
 
     <div class="mb-4 text-sm text-gray-600">

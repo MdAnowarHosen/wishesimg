@@ -31,6 +31,10 @@ class AppServiceProvider extends ServiceProvider
         {
             Splade::setRootView('layouts.adminLayout');
         }
+        elseif(Request::is('login') || Request::is('register') || Request::is('forgot-password'))
+        {
+            Splade::setRootView('root');
+        }
         else
         {
             Splade::setRootView('layouts.frontendLayout');

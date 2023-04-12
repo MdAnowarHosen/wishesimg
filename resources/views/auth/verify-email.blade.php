@@ -2,7 +2,7 @@
 
 <x-authentication-card>
     <x-slot:logo>
-        <x-authentication-card-logo />
+        {{-- <x-authentication-card-logo /> --}}
     </x-slot>
 
     <x-splade-form :action="route('verification.send')" stay prevent-scroll>
