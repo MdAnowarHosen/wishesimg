@@ -6,6 +6,7 @@ use App\Models\Categories\Categories;
 use Kirschbaum\PowerJoins\PowerJoins;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories\SubCategories;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
@@ -41,5 +42,12 @@ class Product extends Model
     public function subcategories()
     {
         return $this->belongsToMany(SubCategories::class, 'subcat_products','product_id','subcategory_id')->withTimestamps(); //pivot table, that model id
+    }
+
+
+    // many to many relationship
+    public function userBookmark()
+    {
+        return $this->belongsToMany(User::class, 'bookmarks','product_id','user_id')->withTimestamps(); //pivot table, that model id,
     }
 }

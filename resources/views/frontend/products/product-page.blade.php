@@ -56,27 +56,76 @@
                     <h1 class=" font-semibold text-lg text-gray-800">{{ $product->name }}</h1>
                 </div>
                 {{-- image name end --}}
-            {{-- <div class="mx-3 mt-5">
+            <div class="mx-3 mt-5">
                 <div class=" flex justify-between">
                     <a href="#" >
-                        <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700">
-                            <x-bi-heart-fill />
+                        <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700" data-tooltip-target="favourite">
+                           <x-tabler-heart />
+                        </div>
+                        <div id="favourite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Favourite
+                            <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
                     </a>
 
-                    <a href="#" >
-                        <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700">
-                            <x-bi-bookmark-plus-fill />
-                        </div>
-                    </a>
+                    {{-- <form action="{{ route('bookmark.add') }}" method="Post">
+                        @csrf
+                        <input type="hidden" name="product" value="{{ $product->slug }}">
+                        <button type="submit">
+                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700" data-tooltip-target="bookmark">
+                                <x-tabler-bookmark />
+                             </div>
+                             <div id="bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                 Bookmark
+                                 <div class="tooltip-arrow" data-popper-arrow></div>
+                             </div>
+                        </button>
+                    </form> --}}
+
+                    @if (Auth::check() && $product->userBookmark->contains(Auth::id()) == true)
+                        <x-splade-form
+                        action="{{ route('bookmark.remove') }}"
+                        :default="['slug' => $product->slug]">
+                        <input v-model="form.slug"  type="hidden"  />
+                        <button type="submit">
+                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-red-700"  title="Remove from bookmark" data-tooltip-target="remove_bookmark">
+                                <x-tabler-bookmark-off/>
+                            </div>
+                            <div id="remove_bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                Remove from bookmark
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                        </button>
+                    </x-splade-form>
+                    @else
+                    <x-splade-form
+                        action="{{ route('bookmark.add') }}"
+                        :default="['slug' => $product->slug]">
+                        <input v-model="form.slug"  type="hidden"  />
+                        <button type="submit">
+                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700" title="Add to bookmark" data-tooltip-target="add_bookmark">
+                                <x-tabler-bookmark />
+                            </div>
+                            <div id="add_bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                Add to bookmark
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                        </button>
+                        </x-splade-form>
+                    @endif
+
 
                     <a href="#" >
-                        <div class=" rounded-full px-8 py-2  bg-gray-300">
-                            <x-bi-share-fill />
+                        <div class=" rounded-full px-8 py-2  bg-gray-300" data-tooltip-target="share">
+                           <x-tabler-share />
+                        </div>
+                        <div id="share" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Share
+                            <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
                     </a>
                 </div>
-              </div> --}}
+              </div>
 
               {{-- Download button --}}
               <div class="mt-5">
