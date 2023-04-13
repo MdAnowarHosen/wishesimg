@@ -16,7 +16,7 @@
       "_nprogress.2ab7724f.js"
     ],
     "css": [
-      "assets/app.c2a93e6c.css"
+      "assets/app.5ba82f6e.css"
     ]
   },
   "node_modules/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.esm.js": {
@@ -77,7 +77,7 @@
     ]
   },
   "resources/js/app.css": {
-    "file": "assets/app.c2a93e6c.css",
+    "file": "assets/app.5ba82f6e.css",
     "src": "resources/js/app.css"
   }
 }
