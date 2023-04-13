@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\Favorite\FavoriteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\Home\HomeController;
 use App\Http\Controllers\Frontend\Products\ProductsController as FrontendProductsController;
+use App\Http\Controllers\Frontend\Search\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,6 +57,10 @@ Route::middleware(['splade'])->group(function () {
 
     });
 
+    /**
+     * search routes
+     */
+    Route::get('search',[SearchController::class,'index'])->name('search');
     /**
      * products routes
      * those routes should be always at bottom

@@ -2,17 +2,19 @@
 
 namespace App\Models\Products;
 
+use App\Models\User;
+use Laravel\Scout\Searchable;
 use App\Models\Categories\Categories;
 use Kirschbaum\PowerJoins\PowerJoins;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Categories\SubCategories;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
-    use HasFactory;
-    use PowerJoins;
+    use HasFactory, PowerJoins, Searchable;
+
+
 
     protected $fillable = [
         'name','slug','thumbnail','low_quality','medium_quality','high_quality','description','keywords','meta_description'
@@ -55,5 +57,16 @@ class Product extends Model
     public function userFavorite()
     {
         return $this->belongsToMany(User::class, 'favorites','product_id','user_id')->withTimestamps(); //pivot table, that model id,
+    }
+
+    /**
+     * scout search system
+     */
+    public function toSearchableArray()
+    {
+        return [
+            'name' => $this->name,
+            'slug' => $this->slug,
+        ];
     }
 }
