@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers\Frontend\Products;
 
-use Illuminate\Http\Request;
 use App\Models\Products\Product;
 use App\Http\Controllers\Controller;
 use ProtoneMedia\Splade\Facades\SEO;
 use App\Models\Categories\Categories;
 use App\Models\Categories\SubCategories;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
     public function show(string $productSlug)
     {
         $product =  Product::whereSlug($productSlug)->firstOrFail();
+        $favCount = DB::table('favorites')->where('product_id',$product->id)->get()->count();
+
         $thoseCat = Categories::whereId($product->randCat->first()->id)->first();
         $thoseCatsPro = $thoseCat->products->take(15);
         SEO::title($product->name);
@@ -21,6 +23,7 @@ class ProductsController extends Controller
             'product' => $product,
             'randProducts' => Product::inRandomOrder()->take(27)->get(),
             'thoseCatsPro' => $thoseCatsPro,
+            'favCount' => $favCount,
         ]);
     }
 

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Products\Product;
+use ProtoneMedia\Splade\SpladeTable;
 use App\Models\Categories\Categories;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
@@ -31,11 +32,16 @@ class AppServiceProvider extends ServiceProvider
         {
             Splade::setRootView('layouts.adminLayout');
         }
+        elseif(Request::is('login') || Request::is('register') || Request::is('forgot-password'))
+        {
+            Splade::setRootView('root');
+        }
         else
         {
             Splade::setRootView('layouts.frontendLayout');
         }
 
+        SpladeTable::defaultSearchDebounce(1000);
 
         $boot_categories = Categories::whereStatus(1)->orderBy('name','asc')->get();
         $rightSideRandProduct = Product::whereStatus(1)->inRandomOrder()->take(6)->get();

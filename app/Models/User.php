@@ -2,16 +2,17 @@
 
 namespace App\Models;
 
+use Laravel\Jetstream\HasTeams;
+use App\Models\Products\Product;
+use Laravel\Sanctum\HasApiTokens;
+use Laravel\Jetstream\HasProfilePhoto;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Fortify\TwoFactorAuthenticatable;
-use Laravel\Jetstream\HasProfilePhoto;
-use Laravel\Jetstream\HasTeams;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -19,6 +20,7 @@ class User extends Authenticatable
     use HasTeams;
     use Notifiable;
     use TwoFactorAuthenticatable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -66,4 +68,16 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    // user's bookmarked products
+    public function bookmarks()
+    {
+        return $this->belongsToMany(Product::class, 'bookmarks','user_id','product_id')->withTimestamps(); //pivot table, that model id,
+    }
+
+    // user's favorites products
+    public function favorites()
+    {
+        return $this->belongsToMany(Product::class, 'favorites','user_id','product_id')->withTimestamps(); //pivot table, that model id,
+    }
 }

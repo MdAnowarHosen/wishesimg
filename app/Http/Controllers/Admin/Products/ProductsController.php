@@ -64,6 +64,7 @@ class ProductsController extends Controller
             ->column('name', sortable:true,searchable:true)
             ->column('slug', sortable:true,searchable:true)
             ->column('description', sortable:true,searchable:true)
+           // ->rowLink(fn (Product $product) => route('admin.products.show', $product))
            ->column(
                 key: 'categories.name',
                 label: 'Category',
@@ -76,6 +77,7 @@ class ProductsController extends Controller
                 sortable: true,
                 searchable:true
             )
+
             ->selectFilter(
                 key: 'categories.id',
                 options: $categories
@@ -85,6 +87,7 @@ class ProductsController extends Controller
                 options: $subcategories
             )
             ->column('action'),
+
         ]);
     }
 

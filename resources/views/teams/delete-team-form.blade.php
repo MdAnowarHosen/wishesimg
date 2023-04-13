@@ -1,8 +1,3 @@
-<x-action-section>
-    <x-slot:title>
-        {{ __('Delete Team') }}
-    </x-slot>
-
     <x-slot:description>
         {{ __('Permanently delete this team.') }}
     </x-slot>
@@ -24,4 +19,4 @@
             </x-splade-form>
         </div>
     </x-slot>
-</x-action-section>
+

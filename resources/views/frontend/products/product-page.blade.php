@@ -56,27 +56,86 @@
                     <h1 class=" font-semibold text-lg text-gray-800">{{ $product->name }}</h1>
                 </div>
                 {{-- image name end --}}
-            {{-- <div class="mx-3 mt-5">
+            <div class="mx-3 mt-5">
                 <div class=" flex justify-between">
-                    <a href="#" >
-                        <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700">
-                            <x-bi-heart-fill />
-                        </div>
-                    </a>
+                    {{-- Favorite --}}
+                    @if (Auth::check() && Auth::user()->favorites->contains($product->id) == true)
+                    <x-splade-form
+                        action="{{ route('favorite.remove') }}"
+                        :default="['slug' => $product->slug]">
+                        <input v-model="form.slug"  type="hidden"  />
+                        <button type="submit">
+                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-red-700"  title="Remove from favorite" data-tooltip-target="remove_favorite">
+                                <x-tabler-heart-off class="inline"/> <span class="inline font-medium text-lg">{{ $favCount }}</span>
+                            </div>
+                            <div id="remove_favorite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                Remove from favorite
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                        </button>
+                    </x-splade-form>
+                    @else
+                    <x-splade-form
+                        action="{{ route('favorite.add') }}"
+                        :default="['slug' => $product->slug]">
+                        <input v-model="form.slug"  type="hidden"  />
+                        <button type="submit">
+                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700"  title="Add to favorite" data-tooltip-target="add_favorite">
+                                <x-tabler-heart class="inline" /> <span class="inline font-medium text-lg">{{ $favCount }}</span>
+                            </div>
+                            <div id="add_favorite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                Add to favorite
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                        </button>
+                    </x-splade-form>
+                    @endif
+
+                    {{-- Bookmarks --}}
+                    @if (Auth::check() && Auth::user()->bookmarks->contains($product->id) == true)
+                        <x-splade-form
+                        action="{{ route('bookmark.remove') }}"
+                        :default="['slug' => $product->slug]">
+                        <input v-model="form.slug"  type="hidden"  />
+                        <button type="submit">
+                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-red-700"  title="Remove from bookmark" data-tooltip-target="remove_bookmark">
+                                <x-tabler-bookmark-off/>
+                            </div>
+                            <div id="remove_bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                Remove from bookmark
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                        </button>
+                    </x-splade-form>
+                    @else
+                    <x-splade-form
+                        action="{{ route('bookmark.add') }}"
+                        :default="['slug' => $product->slug]">
+                        <input v-model="form.slug"  type="hidden"  />
+                        <button type="submit">
+                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700" title="Add to bookmark" data-tooltip-target="add_bookmark">
+                                <x-tabler-bookmark />
+                            </div>
+                            <div id="add_bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                Add to bookmark
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                        </button>
+                        </x-splade-form>
+                    @endif
+
 
                     <a href="#" >
-                        <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700">
-                            <x-bi-bookmark-plus-fill />
+                        <div class=" rounded-full px-8 py-2  bg-gray-300" data-tooltip-target="share">
+                           <x-tabler-share />
                         </div>
-                    </a>
-
-                    <a href="#" >
-                        <div class=" rounded-full px-8 py-2  bg-gray-300">
-                            <x-bi-share-fill />
+                        <div id="share" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                            Share
+                            <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
                     </a>
                 </div>
-              </div> --}}
+              </div>
 
               {{-- Download button --}}
               <div class="mt-5">
