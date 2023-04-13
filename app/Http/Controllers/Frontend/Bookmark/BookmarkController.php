@@ -39,8 +39,8 @@ class BookmarkController extends Controller
          ->paginate()
          ->withQueryString();
 
-         $categories = Categories::whereStatus(1)->pluck('name','id')->toArray();
-         $subcategories = SubCategories::whereStatus(1)->pluck('name','id')->toArray();
+         $categories = Categories::whereStatus(1)->orderBy('name','asc')->pluck('name','id')->toArray();
+         $subcategories = SubCategories::whereStatus(1)->orderBy('name','asc')->pluck('name','id')->toArray();
 
         return view('frontend.bookmarks.show',[
             'bookmarks' => SpladeTable::for($products)
