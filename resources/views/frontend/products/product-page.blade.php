@@ -66,7 +66,7 @@
                         <input v-model="form.slug"  type="hidden"  />
                         <button type="submit">
                             <div class=" rounded-full px-8 py-2 text-gray-100 bg-red-700"  title="Remove from favorite" data-tooltip-target="remove_favorite">
-                                <x-tabler-heart />
+                                <x-tabler-heart-off class="inline"/> <span class="inline font-medium text-lg">{{ $favCount }}</span>
                             </div>
                             <div id="remove_favorite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                 Remove from favorite
@@ -81,7 +81,7 @@
                         <input v-model="form.slug"  type="hidden"  />
                         <button type="submit">
                             <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700"  title="Add to favorite" data-tooltip-target="add_favorite">
-                                <x-tabler-heart />
+                                <x-tabler-heart class="inline" /> <span class="inline font-medium text-lg">{{ $favCount }}</span>
                             </div>
                             <div id="add_favorite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
                                 Add to favorite
