@@ -21,17 +21,6 @@ Route::middleware(['splade'])->group(function () {
         Route::get('/', 'index')->name('/');
     });
 
-    Route::controller(FrontendProductsController::class)->group(function ()
-    {
-        Route::prefix('images')->name('images.')->group(function()
-        {
-            Route::get('/{mainCatSlug}', 'mainCatProducts')->name('main.products');
-            Route::get('/{mainCatSlug}/{subCategorySlug}', 'subCatProducts')->name('subcat.products');
-
-        });
-        Route::get('/{productSlug}', 'show')->name('show.product');
-    });
-
     /**
      * Download routes
      */
@@ -47,8 +36,9 @@ Route::middleware(['splade'])->group(function () {
          * Bookmark Routes
          *
          */
-        Route::controller(BookmarkController::class)->prefix('bookmark')->name('bookmark.')->group(function ()
+        Route::controller(BookmarkController::class)->prefix('bookmarks')->name('bookmark.')->group(function ()
         {
+            Route::get('/', 'show')->name('show');
             Route::post('/add', 'addBookmark')->name('add');
             Route::post('/remove', 'removeBookmark')->name('remove');
 
@@ -64,6 +54,21 @@ Route::middleware(['splade'])->group(function () {
 
         });
 
+    });
+
+    /**
+     * products routes
+     * those routes should be always at bottom
+     */
+    Route::controller(FrontendProductsController::class)->group(function ()
+    {
+        Route::prefix('images')->name('images.')->group(function()
+        {
+            Route::get('/{mainCatSlug}', 'mainCatProducts')->name('main.products');
+            Route::get('/{mainCatSlug}/{subCategorySlug}', 'subCatProducts')->name('subcat.products');
+
+        });
+        Route::get('/{productSlug}', 'show')->name('show.product');
     });
 
 

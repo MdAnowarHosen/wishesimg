@@ -5,13 +5,66 @@ namespace App\Http\Controllers\Frontend\Bookmark;
 use Illuminate\Http\Request;
 use App\Models\Products\Product;
 use App\Models\Bookmark\Bookmark;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use ProtoneMedia\Splade\Facades\SEO;
+use ProtoneMedia\Splade\SpladeTable;
+use App\Models\Categories\Categories;
+use Spatie\QueryBuilder\QueryBuilder;
 use ProtoneMedia\Splade\Facades\Toast;
+use Spatie\QueryBuilder\AllowedFilter;
+use App\Models\Categories\SubCategories;
 
 class BookmarkController extends Controller
 {
+    /**
+     * show user bookmarks
+     */
+    public function show()
+    {
+
+
+        SEO::title('Bookmarked Products');
+
+        $globalSearch = AllowedFilter::callback('global', function ($query, $value) {
+            $query->where('name', 'LIKE', "%{$value}%");
+        });
+
+        $products = QueryBuilder::for(Auth::user()->bookmarks())
+        ->defaultSort('name')
+        ->allowedSorts('name')
+         ->allowedFilters('name','categories.id','subcategories.id',$globalSearch)
+         ->paginate()
+         ->withQueryString();
+
+         $categories = Categories::whereStatus(1)->pluck('name','id')->toArray();
+         $subcategories = SubCategories::whereStatus(1)->pluck('name','id')->toArray();
+
+        return view('frontend.bookmarks.show',[
+            'bookmarks' => SpladeTable::for($products)
+             ->defaultSort('name',)
+             ->withGlobalSearch()
+             ->column('image')
+             ->column('name',sortable:true,searchable:true)
+             ->rowLink(fn (Product $product) => route('show.product', $product->slug))
+             ->withGlobalSearch()
+             ->selectFilter(
+                key: 'categories.id',
+                label: 'Filter by category',
+                options: $categories
+            )
+            ->selectFilter(
+                key: 'subcategories.id',
+                label: 'Filter by sub category',
+                options: $subcategories
+            )
+
+
+        ]);
+    }
+
     /**
      * add bookmark
      */

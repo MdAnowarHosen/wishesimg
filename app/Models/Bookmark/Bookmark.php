@@ -2,14 +2,14 @@
 
 namespace App\Models\Bookmark;
 
-use App\Models\Products\Product;
-use Illuminate\Database\Eloquent\Model;
+use Kirschbaum\PowerJoins\PowerJoins;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Bookmark extends Pivot
 {
     use HasFactory;
+    use PowerJoins;
 
     protected $fillable = [
         'user_id','product_id'
