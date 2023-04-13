@@ -69,9 +69,15 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
-    // many to many relationship
+    // user's bookmarked products
     public function bookmarks()
     {
         return $this->belongsToMany(Product::class, 'bookmarks','user_id','product_id')->withTimestamps(); //pivot table, that model id,
+    }
+
+    // user's favorites products
+    public function favorites()
+    {
+        return $this->belongsToMany(Product::class, 'favorites','user_id','product_id')->withTimestamps(); //pivot table, that model id,
     }
 }

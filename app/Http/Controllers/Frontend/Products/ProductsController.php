@@ -2,27 +2,17 @@
 
 namespace App\Http\Controllers\Frontend\Products;
 
-use Illuminate\Http\Request;
 use App\Models\Products\Product;
 use App\Http\Controllers\Controller;
 use ProtoneMedia\Splade\Facades\SEO;
 use App\Models\Categories\Categories;
 use App\Models\Categories\SubCategories;
-use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
     public function show(string $productSlug)
     {
         $product =  Product::whereSlug($productSlug)->firstOrFail();
-
-
-        // $user = User::first();
-        // //dd($user->bookmarks->contains($product->id));
-       //  dd($product->userBookmark);
-
-
-
 
         $thoseCat = Categories::whereId($product->randCat->first()->id)->first();
         $thoseCatsPro = $thoseCat->products->take(15);

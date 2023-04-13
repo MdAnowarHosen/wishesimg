@@ -45,9 +45,15 @@ class Product extends Model
     }
 
 
-    // many to many relationship
+    // product's bookmarked user
     public function userBookmark()
     {
         return $this->belongsToMany(User::class, 'bookmarks','product_id','user_id')->withTimestamps(); //pivot table, that model id,
+    }
+
+    // product's favorites user
+    public function userFavorite()
+    {
+        return $this->belongsToMany(User::class, 'favorites','product_id','user_id')->withTimestamps(); //pivot table, that model id,
     }
 }

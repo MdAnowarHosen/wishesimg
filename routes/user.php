@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Frontend\Bookmark\BookmarkController;
 use App\Http\Controllers\Frontend\Download\DownloadController;
+use App\Http\Controllers\Frontend\Favorite\FavoriteController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\Home\HomeController;
 use App\Http\Controllers\Frontend\Products\ProductsController as FrontendProductsController;
@@ -50,6 +51,16 @@ Route::middleware(['splade'])->group(function () {
         {
             Route::post('/add', 'addBookmark')->name('add');
             Route::post('/remove', 'removeBookmark')->name('remove');
+
+        });
+                /**
+         * Favorite products Routes
+         *
+         */
+        Route::controller(FavoriteController::class)->prefix('favorite')->name('favorite.')->group(function ()
+        {
+            Route::post('/add', 'addFavorite')->name('add');
+            Route::post('/remove', 'removeFavorite')->name('remove');
 
         });
 

@@ -58,31 +58,41 @@
                 {{-- image name end --}}
             <div class="mx-3 mt-5">
                 <div class=" flex justify-between">
-                    <a href="#" >
-                        <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700" data-tooltip-target="favourite">
-                           <x-tabler-heart />
-                        </div>
-                        <div id="favourite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                            Favourite
-                            <div class="tooltip-arrow" data-popper-arrow></div>
-                        </div>
-                    </a>
-
-                    {{-- <form action="{{ route('bookmark.add') }}" method="Post">
-                        @csrf
-                        <input type="hidden" name="product" value="{{ $product->slug }}">
+                    {{-- Favorite --}}
+                    @if (Auth::check() && Auth::user()->favorites->contains($product->id) == true)
+                    <x-splade-form
+                        action="{{ route('favorite.remove') }}"
+                        :default="['slug' => $product->slug]">
+                        <input v-model="form.slug"  type="hidden"  />
                         <button type="submit">
-                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700" data-tooltip-target="bookmark">
-                                <x-tabler-bookmark />
-                             </div>
-                             <div id="bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                 Bookmark
-                                 <div class="tooltip-arrow" data-popper-arrow></div>
-                             </div>
+                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-red-700"  title="Remove from favorite" data-tooltip-target="remove_favorite">
+                                <x-tabler-heart />
+                            </div>
+                            <div id="remove_favorite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                Remove from favorite
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
                         </button>
-                    </form> --}}
+                    </x-splade-form>
+                    @else
+                    <x-splade-form
+                        action="{{ route('favorite.add') }}"
+                        :default="['slug' => $product->slug]">
+                        <input v-model="form.slug"  type="hidden"  />
+                        <button type="submit">
+                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700"  title="Add to favorite" data-tooltip-target="add_favorite">
+                                <x-tabler-heart />
+                            </div>
+                            <div id="add_favorite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                Add to favorite
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                        </button>
+                    </x-splade-form>
+                    @endif
 
-                    @if (Auth::check() && $product->userBookmark->contains(Auth::id()) == true)
+                    {{-- Bookmarks --}}
+                    @if (Auth::check() && Auth::user()->bookmarks->contains($product->id) == true)
                         <x-splade-form
                         action="{{ route('bookmark.remove') }}"
                         :default="['slug' => $product->slug]">
