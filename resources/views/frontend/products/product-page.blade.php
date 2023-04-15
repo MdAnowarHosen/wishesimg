@@ -223,21 +223,21 @@
             <p class=" text-3xl font-black text-gray-700 mb-10">Share</p>
             <div class="flex">
                 <div>
-                    <a href="{{ 'https://www.facebook.com/sharer/sharer.php?u='.env('APP_URL').'/'.$product->slug }}" target="_blank">
+                    <a href="{{ 'https://www.facebook.com/sharer/sharer.php?u='.'https://www.wishesimg.com/'.$product->slug }}" target="_blank">
                        <div class="facebook p-5 rounded-lg mr-3">
                         <x-tabler-brand-facebook class="text-2xl text-white"/>
                        </div>
                     </a>
                 </div>
                 <div>
-                    <a href="{{ 'https://twitter.com/intent/tweet?text='.$product->name.'&url='.env('APP_URL').'/'.$product->slug }}" target="_blank">
+                    <a href="{{ 'https://twitter.com/intent/tweet?text='.$product->name.'&url='.'https://www.wishesimg.com/'.$product->slug }}" target="_blank">
                        <div class="twitter p-5 rounded-lg  mr-3">
                         <x-tabler-brand-twitter class="text-2xl text-white"/>
                        </div>
                     </a>
                 </div>
                 <div>
-                    <a href="{{ 'https://web.whatsapp.com/send?text='.env('APP_URL').'/'.$product->slug }}" target="_blank">
+                    <a href="{{ 'https://web.whatsapp.com/send?text='.'https://www.wishesimg.com/'.$product->slug }}" target="_blank">
                     <div class="whatsapp p-5 rounded-lg mr-3">
                         <x-tabler-brand-whatsapp class="text-2xl text-white"/>
                     </div>
