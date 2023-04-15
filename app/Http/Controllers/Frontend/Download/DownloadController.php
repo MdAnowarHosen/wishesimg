@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Products\Product;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Frontend\Download\GuestsDownload;
 use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\Facades\Toast;
 use Illuminate\Support\Facades\Storage;
@@ -86,7 +87,18 @@ class DownloadController extends Controller
                   /**
                  * add product, user who downloaded
                  */
-                $this->downloaded($product->id, $quality = 'low');
+                if (Auth::check())
+                {
+                    if (Auth::user()->is_admin == false)
+                    {
+                        $this->downloaded($product->id, $quality = 'low');
+                    }
+                }
+                else
+                {
+                    $this->guestDownload($product->id, $quality = 'low');
+                }
+
                 return Storage::disk('wishes')->download($path, $product->name.'.'.$extension,['Content-Type', 'image/jpeg']);
             }
             else
@@ -114,7 +126,18 @@ class DownloadController extends Controller
                    /**
                  * add product, user who downloaded
                  */
-                $this->downloaded($product->id, $quality = 'medium');
+                if (Auth::check())
+                {
+                    if (Auth::user()->is_admin == false)
+                    {
+                        $this->downloaded($product->id, $quality = 'medium');
+                    }
+                }
+                else
+                {
+                    $this->guestDownload($product->id, $quality = 'medium');
+                }
+
                 return Storage::disk('wishes')->download($path, $product->name.'.'.$extension,['Content-Type', 'image/jpeg']);
             }
             else
@@ -127,30 +150,7 @@ class DownloadController extends Controller
             }
 
         }
-            /**
-            * add product, user who downloaded
-            */
-        private function downloaded($product, $quality)
-        {
-                /**
-                 * add product, user who downloaded
-                 */
-                DB::beginTransaction();
-                try
-                {
-                    Auth::user()->downloads()->attach([
-                        $product => [
-                            'quality' => $quality
-                        ]
-                    ]);
-                    DB::commit();
-                }
-                catch (\Throwable $th)
-                {
-                   DB::rollBack();
-                }
 
-        }
         /**
          * Download High Quality Image
          */
@@ -168,7 +168,18 @@ class DownloadController extends Controller
                     /**
                     * add product, user who downloaded
                     */
-                    $this->downloaded($product->id, $quality = 'high');
+                    if (Auth::check())
+                    {
+                        if (Auth::user()->is_admin == false)
+                        {
+                            $this->downloaded($product->id, $quality = 'high');
+                        }
+                    }
+                    else
+                    {
+                        $this->guestDownload($product->id, $quality = 'high');
+                    }
+
                     return Storage::disk('wishes')->download($path, $product->name.'.'.$extension,['Content-Type', 'image/jpeg']);
                 }
                 else
@@ -190,5 +201,52 @@ class DownloadController extends Controller
             }
 
         }
+
+
+            /**
+            * add product, user who downloaded
+            */
+            private function downloaded($product, $quality)
+            {
+                    /**
+                     * store product, user who downloaded
+                     */
+                    DB::beginTransaction();
+                    try
+                    {
+                        Auth::user()->downloads()->attach([
+                            $product => [
+                                'quality' => $quality
+                            ]
+                        ]);
+                        DB::commit();
+                    }
+                    catch (\Throwable $th)
+                    {
+                       DB::rollBack();
+                    }
+
+            }
+
+        /**
+         * store guest download data
+         */
+
+         private function guestDownload($product, $quality)
+         {
+            DB::beginTransaction();
+            try
+            {
+                GuestsDownload::create([
+                    'product_id' => $product,
+                    'quality' => $quality
+                ]);
+            DB::commit();
+            }
+            catch (\Throwable $th)
+            {
+                DB::rollBack();
+            }
+         }
 
 }
