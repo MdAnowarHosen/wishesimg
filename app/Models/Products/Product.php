@@ -59,6 +59,12 @@ class Product extends Model
         return $this->belongsToMany(User::class, 'favorites','product_id','user_id')->withTimestamps(); //pivot table, that model id,
     }
 
+    // product's downloaded
+    public function downloaded()
+    {
+        return $this->belongsToMany(User::class, 'downloads','product_id','user_id')->withTimestamps(); //pivot table, that model id,
+    }
+
     /**
      * scout search system
      */

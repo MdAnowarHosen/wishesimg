@@ -80,4 +80,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Product::class, 'favorites','user_id','product_id')->withTimestamps(); //pivot table, that model id,
     }
+
+    // user's downloaded products
+    public function downloads()
+    {
+        return $this->belongsToMany(Product::class, 'downloads','user_id','product_id')->withTimestamps(); //pivot table, that model id,
+    }
 }
