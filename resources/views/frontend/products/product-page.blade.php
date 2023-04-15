@@ -125,7 +125,7 @@
                     @endif
 
 
-                    <a href="#" >
+                    <Link href="#share" >
                         <div class=" rounded-full px-8 py-2  bg-gray-300" data-tooltip-target="share">
                            <x-tabler-share />
                         </div>
@@ -133,7 +133,7 @@
                             Share
                             <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
-                    </a>
+                    </Link>
                 </div>
               </div>
 
@@ -218,6 +218,34 @@
             </div>
         </x-splade-modal>
          {{-- Download Modal End --}}
+        {{-- share modal --}}
+        <x-splade-modal name="share">
+            <p class=" text-3xl font-black text-gray-700 mb-10">Share</p>
+            <div class="flex">
+                <div>
+                    <a href="{{ 'https://www.facebook.com/sharer/sharer.php?u='.env('APP_URL').'/'.$product->slug }}" target="_blank">
+                       <div class="facebook p-5 rounded-lg mr-3">
+                        <x-tabler-brand-facebook class="text-2xl text-white"/>
+                       </div>
+                    </a>
+                </div>
+                <div>
+                    <a href="{{ 'https://twitter.com/intent/tweet?text='.$product->name.'&url='.env('APP_URL').'/'.$product->slug }}" target="_blank">
+                       <div class="twitter p-5 rounded-lg  mr-3">
+                        <x-tabler-brand-twitter class="text-2xl text-white"/>
+                       </div>
+                    </a>
+                </div>
+                <div>
+                    <a href="{{ 'https://web.whatsapp.com/send?text='.env('APP_URL').'/'.$product->slug }}" target="_blank">
+                    <div class="whatsapp p-5 rounded-lg mr-3">
+                        <x-tabler-brand-whatsapp class="text-2xl text-white"/>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </x-splade-modal>
+        {{-- share modal ends --}}
     </div>
     </div>
 </div>
