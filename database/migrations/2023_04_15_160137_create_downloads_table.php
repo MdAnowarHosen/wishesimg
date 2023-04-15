@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('downloads', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->references('id')->on('users')->onDelete('cascade')->comment('favorite user id');
+            $table->integer('user_id')->references('id')->on('users')->onDelete('cascade')->comment('user id');
             $table->foreignId('product_id')->references('id')->on('products')->onDelete('cascade')->comment('Product ID');
             $table->string('quality');
             $table->timestamps();
