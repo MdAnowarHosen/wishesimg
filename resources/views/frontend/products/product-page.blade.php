@@ -92,7 +92,7 @@
                         <div class="">
                             <div class="text-center">
                                 <Link href="#share" >
-                                    <div class=" rounded-full w-14 h-8  bg-gray-300" data-tooltip-target="share">
+                                    <div class=" rounded-full w-14 h-8  bg-gray-300" data-tooltip-target="share" title="Share">
                                        <x-tabler-share class="inline"/>
                                     </div>
                                     <div id="share" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -222,7 +222,7 @@
                 <div class="col-span-6 lg:col-span-4">
                     <div class="text-center">
                         <Link href="#share" >
-                            <div class=" rounded-full w-14 h-8  bg-gray-300" data-tooltip-target="share">
+                            <div class=" rounded-full w-14 h-8  bg-gray-300" data-tooltip-target="share" title="Share">
                                <x-tabler-share class="inline"/>
                             </div>
                             <div id="share" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
