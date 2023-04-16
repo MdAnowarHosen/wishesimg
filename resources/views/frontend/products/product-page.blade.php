@@ -22,7 +22,7 @@
                         </p>
                     </div>
                     <div class="mt-10">
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @foreach ($randProducts->chunk(3) as $randChunk)
                                 <div class="grid gap-4">
                                     @foreach ($randChunk as $randPro)
@@ -57,15 +57,17 @@
                 </div>
                 {{-- image name end --}}
             <div class="mx-3 mt-5">
-                <div class=" flex justify-between">
-                    {{-- Favorite --}}
+                <div class="  grid grid-cols-12 gap-3">
+                    <div class="col-span-6 lg:col-span-4">
+                           {{-- Favorite --}}
                     @if (Auth::check() && Auth::user()->favorites->contains($product->id) == true)
                     <x-splade-form
                         action="{{ route('favorite.remove') }}"
+                        class="mb-1 xl:mb-0 "
                         :default="['slug' => $product->slug]">
                         <input v-model="form.slug"  type="hidden"  />
                         <button type="submit">
-                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-red-700"  title="Remove from favorite" data-tooltip-target="remove_favorite">
+                            <div class=" rounded-full w-14 h-8 text-gray-100 bg-red-700"  title="Remove from favorite" data-tooltip-target="remove_favorite">
                                 <x-tabler-heart-off class="inline"/> <span class="inline font-medium text-lg">{{ $favCount }}</span>
                             </div>
                             <div id="remove_favorite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -76,11 +78,12 @@
                     </x-splade-form>
                     @else
                     <x-splade-form
+                        class="mb-1 xl:mb-0 "
                         action="{{ route('favorite.add') }}"
                         :default="['slug' => $product->slug]">
                         <input v-model="form.slug"  type="hidden"  />
                         <button type="submit">
-                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700"  title="Add to favorite" data-tooltip-target="add_favorite">
+                            <div class=" rounded-full w-14 h-8 text-gray-100 bg-blue-700"  title="Add to favorite" data-tooltip-target="add_favorite">
                                 <x-tabler-heart class="inline" /> <span class="inline font-medium text-lg">{{ $favCount }}</span>
                             </div>
                             <div id="add_favorite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -90,53 +93,57 @@
                         </button>
                     </x-splade-form>
                     @endif
-
-                    {{-- Bookmarks --}}
-                    @if (Auth::check() && Auth::user()->bookmarks->contains($product->id) == true)
+                    </div>
+                    <div class="col-span-6 lg:col-span-4">
+                        {{-- Bookmarks --}}
+                        @if (Auth::check() && Auth::user()->bookmarks->contains($product->id) == true)
                         <x-splade-form
-                        action="{{ route('bookmark.remove') }}"
-                        :default="['slug' => $product->slug]">
-                        <input v-model="form.slug"  type="hidden"  />
-                        <button type="submit">
-                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-red-700"  title="Remove from bookmark" data-tooltip-target="remove_bookmark">
-                                <x-tabler-bookmark-off/>
-                            </div>
-                            <div id="remove_bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                Remove from bookmark
-                                <div class="tooltip-arrow" data-popper-arrow></div>
-                            </div>
-                        </button>
-                    </x-splade-form>
-                    @else
-                    <x-splade-form
-                        action="{{ route('bookmark.add') }}"
-                        :default="['slug' => $product->slug]">
-                        <input v-model="form.slug"  type="hidden"  />
-                        <button type="submit">
-                            <div class=" rounded-full px-8 py-2 text-gray-100 bg-blue-700" title="Add to bookmark" data-tooltip-target="add_bookmark">
-                                <x-tabler-bookmark />
-                            </div>
-                            <div id="add_bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                                Add to bookmark
-                                <div class="tooltip-arrow" data-popper-arrow></div>
-                            </div>
-                        </button>
+                            action="{{ route('bookmark.remove') }}"
+                            :default="['slug' => $product->slug]">
+                            <input v-model="form.slug"  type="hidden"  />
+                            <button type="submit">
+                                <div class=" rounded-full w-14 h-8 text-gray-100 bg-red-700"  title="Remove from bookmark" data-tooltip-target="remove_bookmark">
+                                    <x-tabler-bookmark-off class="inline"/>
+                                </div>
+                                <div id="remove_bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    Remove from bookmark
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
+                            </button>
                         </x-splade-form>
-                    @endif
+                        @else
+                        <x-splade-form
 
-
-                    <Link href="#share" >
-                        <div class=" rounded-full px-8 py-2  bg-gray-300" data-tooltip-target="share">
-                           <x-tabler-share />
-                        </div>
-                        <div id="share" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                            Share
-                            <div class="tooltip-arrow" data-popper-arrow></div>
-                        </div>
-                    </Link>
+                            action="{{ route('bookmark.add') }}"
+                            :default="['slug' => $product->slug]">
+                            <input v-model="form.slug"  type="hidden"  />
+                            <button type="submit">
+                                <div class=" rounded-full w-14 h-8 text-gray-100 bg-blue-700" title="Add to bookmark" data-tooltip-target="add_bookmark">
+                                    <x-tabler-bookmark class="inline" />
+                                </div>
+                                <div id="add_bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                    Add to bookmark
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div>
+                            </button>
+                        </x-splade-form>
+                        @endif
+                    </div>
+                <div class="col-span-6 lg:col-span-4">
+                    <div class="text-center">
+                        <Link href="#share" >
+                            <div class=" rounded-full w-14 h-8  bg-gray-300" data-tooltip-target="share">
+                               <x-tabler-share class="inline"/>
+                            </div>
+                            <div id="share" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                Share
+                                <div class="tooltip-arrow" data-popper-arrow></div>
+                            </div>
+                        </Link>
+                    </div>
+                </div>
                 </div>
               </div>
-
               {{-- Download button --}}
               <div class="mt-5">
                 <Link href="#download_modal" class=" cursor-pointer">
@@ -150,7 +157,6 @@
                     Ads
                 </div>
             </div>
-
         </div>
          {{-- Desktip image info and download option end--}}
           {{-- more images --}}
@@ -179,8 +185,8 @@
         {{-- more images end --}}
         </div>
          {{-- Download Modal Start --}}
-         <x-splade-modal name="download_modal" slideover max-width="lg" class="z-40" >
-            <div class="px-6 py-6 lg:px-8 bg-slate-800 z-40 rounded-lg ">
+         <x-splade-modal name="download_modal" slideover max-width="lg" class="pt-24" >
+            <div class="px-6 py-6 lg:px-8 bg-slate-800 rounded-lg z-60">
                 <h3 class="mb-4 text-xl text-gray-300 font-bold dark:text-white">Select Image Quality</h3>
                 <form class="space-y-6" action="{{ route('download.post.req',$product->slug) }}" method="post">
                     @csrf

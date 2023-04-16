@@ -33,7 +33,7 @@
         <div>
             <div>
                 <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email or Username</label>
-                <input type="text"  id="email" name="email" value="{{ old('email') }}" required autofocus class="rounded-none rounded-l-lg bg-gray-50 border text-gray-900 focus:ring-0 focus:border-gray-200 block flex-1 min-w-0 w-full text-sm border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                <input type="text"  id="email" name="email" value="{{ old('email') }}" required autofocus class="rounded-lg bg-gray-50 border text-gray-900 focus:ring-0 focus:border-gray-200 block flex-1 min-w-0 w-full text-sm border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
             </div>
                 @error('email')
                 <span class=" text-red-500 font-normal text-sm" role="alert">
@@ -44,7 +44,7 @@
     <div>
         <div class="mt-4">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"> Password</label>
-            <input type="password" id="password" name="password" required autocomplete="current-password" class="rounded-none rounded-l-lg bg-gray-50 border text-gray-900 focus:ring-0 focus:border-gray-200 block flex-1 min-w-0 w-full text-sm border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+            <input type="password" id="password" name="password" required autocomplete="current-password" class="rounded-lg bg-gray-50 border text-gray-900 focus:ring-0 focus:border-gray-200 block flex-1 min-w-0 w-full text-sm border-gray-300  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
         </div>
             @error('password')
             <span class=" text-red-500 font-normal text-sm" role="alert">

@@ -18,7 +18,8 @@
     </head>
     <body class="font-sans antialiased">
         @splade
-
+    {{-- bottom navigation --}}
+    @include('include.bottomNav')
     <script>
         function showRegPass()
             {
