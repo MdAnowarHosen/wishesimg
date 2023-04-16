@@ -15,6 +15,96 @@
                     <img class=" block mx-auto rounded-lg" style="max-height: 600px;"
                     src="{{ Storage::disk('wishes')->url('wishesFiles/product/low/'.$product->low_quality) }}"
                     alt="{{ $product->name }}">
+                    {{-- mobile favorite, bookmark, share button --}}
+                    <div class="mx-3 mt-8 block md:hidden">
+                        <div class="flex justify-around">
+                            <div class="">
+                                   {{-- Favorite --}}
+                            @if (Auth::check() && Auth::user()->favorites->contains($product->id) == true)
+                            <x-splade-form
+                                action="{{ route('favorite.remove') }}"
+                                class="mb-1 xl:mb-0 "
+                                :default="['slug' => $product->slug]">
+                                <input v-model="form.slug"  type="hidden"  />
+                                <button type="submit">
+                                    <div class=" rounded-full w-14 h-8 text-gray-100 bg-red-700"  title="Remove from favorite" data-tooltip-target="remove_favorite">
+                                        <x-tabler-heart-off class="inline"/> <span class="inline font-medium text-lg">{{ $favCount }}</span>
+                                    </div>
+                                    <div id="remove_favorite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        Remove from favorite
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+                                </button>
+                            </x-splade-form>
+                            @else
+                            <x-splade-form
+                                class="mb-1 xl:mb-0 "
+                                action="{{ route('favorite.add') }}"
+                                :default="['slug' => $product->slug]">
+                                <input v-model="form.slug"  type="hidden"  />
+                                <button type="submit">
+                                    <div class=" rounded-full w-14 h-8 text-gray-100 bg-blue-700"  title="Add to favorite" data-tooltip-target="add_favorite">
+                                        <x-tabler-heart class="inline" /> <span class="inline font-medium text-lg">{{ $favCount }}</span>
+                                    </div>
+                                    <div id="add_favorite" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        Add to favorite
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+                                </button>
+                            </x-splade-form>
+                            @endif
+                            </div>
+                            <div class="">
+                                {{-- Bookmarks --}}
+                                @if (Auth::check() && Auth::user()->bookmarks->contains($product->id) == true)
+                                <x-splade-form
+                                    action="{{ route('bookmark.remove') }}"
+                                    :default="['slug' => $product->slug]">
+                                    <input v-model="form.slug"  type="hidden"  />
+                                    <button type="submit">
+                                        <div class=" rounded-full w-14 h-8 text-gray-100 bg-red-700"  title="Remove from bookmark" data-tooltip-target="remove_bookmark">
+                                            <x-tabler-bookmark-off class="inline"/>
+                                        </div>
+                                        <div id="remove_bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                            Remove from bookmark
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
+                                    </button>
+                                </x-splade-form>
+                                @else
+                                <x-splade-form
+
+                                    action="{{ route('bookmark.add') }}"
+                                    :default="['slug' => $product->slug]">
+                                    <input v-model="form.slug"  type="hidden"  />
+                                    <button type="submit">
+                                        <div class=" rounded-full w-14 h-8 text-gray-100 bg-blue-700" title="Add to bookmark" data-tooltip-target="add_bookmark">
+                                            <x-tabler-bookmark class="inline" />
+                                        </div>
+                                        <div id="add_bookmark" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                            Add to bookmark
+                                            <div class="tooltip-arrow" data-popper-arrow></div>
+                                        </div>
+                                    </button>
+                                </x-splade-form>
+                                @endif
+                            </div>
+                        <div class="">
+                            <div class="text-center">
+                                <Link href="#share" >
+                                    <div class=" rounded-full w-14 h-8  bg-gray-300" data-tooltip-target="share">
+                                       <x-tabler-share class="inline"/>
+                                    </div>
+                                    <div id="share" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                                        Share
+                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                    </div>
+                                </Link>
+                            </div>
+                        </div>
+                        </div>
+                      </div>
+        {{-- mobile favorite, bookmark, share button end--}}
                     <div class=" mt-5">
                         <p class=" leading-7 text-gray-800">
                             <span class=" text-lg font-bold text-gray-800">Description: </span>
@@ -185,9 +275,16 @@
         {{-- more images end --}}
         </div>
          {{-- Download Modal Start --}}
-         <x-splade-modal name="download_modal" slideover max-width="lg" class="pt-24" >
+         <x-splade-modal name="download_modal" slideover max-width="lg" class="pt-24" :close-button="false">
             <div class="px-6 py-6 lg:px-8 bg-slate-800 rounded-lg z-60">
-                <h3 class="mb-4 text-xl text-gray-300 font-bold dark:text-white">Select Image Quality</h3>
+                <div class="flex justify-between">
+                    <div>
+                        <h3 class="mb-4 text-xl text-gray-300 font-bold dark:text-white">Select Image Quality</h3>
+                    </div>
+                    <div class="text-righ">
+                        <button type="button" class=" bg-gray-700 px-3 py-1 rounded-md text-red-400" @click="modal.close" title="Close"><x-tabler-x /></button>
+                    </div>
+                </div>
                 <form class="space-y-6" action="{{ route('download.post.req',$product->slug) }}" method="post">
                     @csrf
                 <ul class="w-full text-sm font-medium text-gray-900 border border-gray-700 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -229,21 +326,21 @@
             <p class=" text-3xl font-black text-gray-700 mb-10">Share</p>
             <div class="flex">
                 <div>
-                    <a href="{{ 'https://www.facebook.com/sharer/sharer.php?u='.'https://www.wishesimg.com/'.$product->slug }}" target="_blank">
+                    <a href="{{ 'https://www.facebook.com/sharer/sharer.php?u='.'https://www.wishesimg.com/'.$product->slug }}" target="_blank" title="Share on Facebook">
                        <div class="facebook p-5 rounded-lg mr-3">
                         <x-tabler-brand-facebook class="text-2xl text-white"/>
                        </div>
                     </a>
                 </div>
                 <div>
-                    <a href="{{ 'https://twitter.com/intent/tweet?text='.$product->name.'&url='.'https://www.wishesimg.com/'.$product->slug }}" target="_blank">
+                    <a href="{{ 'https://twitter.com/intent/tweet?text='.$product->name.'&url='.'https://www.wishesimg.com/'.$product->slug }}" target="_blank" title="Share on Twitter">
                        <div class="twitter p-5 rounded-lg  mr-3">
                         <x-tabler-brand-twitter class="text-2xl text-white"/>
                        </div>
                     </a>
                 </div>
                 <div>
-                    <a href="{{ 'https://web.whatsapp.com/send?text='.'https://www.wishesimg.com/'.$product->slug }}" target="_blank">
+                    <a href="{{ 'https://web.whatsapp.com/send?text='.'https://www.wishesimg.com/'.$product->slug }}" target="_blank" title="Share on Whatsapp">
                     <div class="whatsapp p-5 rounded-lg mr-3">
                         <x-tabler-brand-whatsapp class="text-2xl text-white"/>
                     </div>

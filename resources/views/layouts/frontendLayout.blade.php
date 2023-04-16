@@ -180,7 +180,7 @@
              <div class="p-4 mt-14">
                 <div class="grid grid-cols-12 gap-3">
                     <div class="col-span-12 md:col-span-9">
-                        <div class="">
+                        <div>
                             @splade
                         </div>
                     </div>
