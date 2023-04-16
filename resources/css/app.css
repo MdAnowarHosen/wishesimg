@@ -3,7 +3,9 @@
 @tailwind utilities;
 @layer base
 {
-
+    .z-60{
+        z-index: 60;
+    }
 }
 
 @layer components {
