@@ -14,6 +14,10 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('sitemap:generate')->daily();
+        $schedule->command('splade:cleanup-uploads')->daily();
+        $schedule->command('queue:retry all')->everyThreeMinutes();
+        $schedule->command('queue:restart')->everyThirtyMinutes();
+        $schedule->command('queue:work --timeout=40 --tries=5 --delay=10')->everyThirtyMinutes();
     }
 
     /**
