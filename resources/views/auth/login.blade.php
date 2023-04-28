@@ -1,7 +1,7 @@
 @seoTitle(__('Log in'))
 <x-authentication-card>
     <x-slot:logo>
-        {{-- <x-authentication-card-logo /> --}}
+        <x-authentication-card-logo />
         <div class="mb-5">
             <h1 class=" text-2xl font-semibold text-gray-700 mb-3">Sign in</h1>
             <h2 class=" text-lg font-normal text-gray-700">to continue WishesImg</h2>
@@ -74,7 +74,7 @@
         <label for="toggle" class="text-sm text-gray-700">Show Password</label>
     </div>
       <div>
-        <button type="submit" class="mt-8 w-full rounded-full py-3 bg-indigo-500 text-white font-bold shadow-md shadow-gray-500/50 ">
+        <button type="submit" class="mt-8 w-full rounded-full py-3 bg-blue-700 hover:bg-blue-800 text-white font-bold shadow-md shadow-gray-500/50 ">
             {{ __('Log in') }}
         </button>
       </div>
