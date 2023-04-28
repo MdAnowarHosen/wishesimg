@@ -67,6 +67,7 @@ class ProductsController extends Controller
         $category = Categories::whereSlug($mainCatSlug)->whereStatus(1)->firstOrFail();
         $products = $category->products->paginate(90);
         /**
+         *
          * SEO
          */
         SEO::title($category->name)

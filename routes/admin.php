@@ -20,7 +20,6 @@ Route::middleware(['splade'])->group(function () {
         'auth',
         config('jetstream.auth_session'),
         'verified',
-        'customVerified',
         'admin'
     ])->prefix('wishes/admin')->name('admin.')->group(function ()
     {
@@ -49,7 +48,9 @@ Route::middleware(['splade'])->group(function () {
         // product edit get category
         Route::get('products/{product}/get/subcategory/{category}',[ProductsController::class,'getSubCategoryEdit'])->name('get.subcategory.edit');
 
-
+        Route::get('/test',function(){
+            // return view('test.test');
+         });
 
     });
 });
