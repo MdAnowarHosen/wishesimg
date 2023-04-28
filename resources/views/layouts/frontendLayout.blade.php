@@ -28,7 +28,7 @@
                   <a href="{{ route('/') }}" class="flex ml-2 md:mr-24">
                     <img src="{{ asset('img/logo.png') }}" class="h-8 mr-3" alt="WishesImg Logo" />
                     {{-- <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">WishesImg</span> --}}
-                    <span class=" text-xl font-bold sm:text-2xl text-gray-700 whitespace-nowrap dark:text-white">WishesImg</span>
+                    <span class=" text-xl font-bold sm:text-2xl text-gray-700 whitespace-nowrap dark:text-white hidden sm:block">WishesImg</span>
                   </a>
                 </div>
                 <div class="flex items-start justify-center w-full ">
