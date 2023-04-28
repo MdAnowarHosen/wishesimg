@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Categories\Categories;
 use App\Models\Products\Product;
 use Illuminate\Http\Request;
+use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Str;
+use ProtoneMedia\Splade\Facades\SEO;
 
 class HomeController extends Controller
 {
@@ -20,7 +23,11 @@ class HomeController extends Controller
 
     public function about()
     {
-        return "About";
+        SEO::title('About us');
+        $aboutFile = Jetstream::localizedMarkdownPath('about.md');
+        return view('frontend.pages.about', [
+            'about' => Str::markdown(file_get_contents($aboutFile)),
+        ]);
     }
 
     public function faq()

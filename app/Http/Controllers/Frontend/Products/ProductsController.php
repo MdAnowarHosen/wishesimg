@@ -25,7 +25,7 @@ class ProductsController extends Controller
          */
         $imageUrl = 'https://www.wishesimg.com'.Storage::disk('wishes')->url('wishesFiles/product/thumbnail/'.$product->thumbnail);
         SEO::title($product->name)
-        ->description($product->meta_description ?? 'Get and Download wishes and mimes images for free')
+        ->description($product->meta_description ?? 'Get and Download wishes and mimes images for free - Wishes Image')
         ->keywords($product->keywords);
 
         /**
@@ -43,7 +43,7 @@ class ProductsController extends Controller
         SEO::twitterCard('summary_large_image');
         SEO::twitterSite(env('APP_NAME','WishesImg'));
         SEO::twitterTitle($product->name);
-        SEO::twitterDescription($product->meta_description ?? 'Get and Download wishes and mimes images for free');
+        SEO::twitterDescription($product->meta_description ?? 'Get and Download wishes and mimes images for free - Wishes Image');
         SEO::twitterImage($imageUrl);
 
         /**
@@ -71,7 +71,7 @@ class ProductsController extends Controller
          * SEO
          */
         SEO::title($category->name)
-        ->description($category->description ?? 'Get and Download wishes and mimes images for free');
+        ->description($category->description ?? 'Get and Download wishes and mimes images for free - Wishes Image');
         return view('frontend.products.mainCategoriesProducts',[
             'products' => $products,
             'category' => $category->name,
@@ -88,7 +88,7 @@ class ProductsController extends Controller
          * SEO
          */
         SEO::title($subCategory->name)
-        ->description($subCategory->description ?? 'Get and Download wishes and mimes images for free');
+        ->description($subCategory->description ?? 'Get and Download wishes and mimes images for free - Wishes Image');
         return view('frontend.products.subCategoriesProducts',[
             'subCatPro' => $subCatPro,
             'subCategory' => $subCategory->name,
