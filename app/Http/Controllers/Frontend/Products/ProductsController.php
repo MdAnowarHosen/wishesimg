@@ -65,7 +65,7 @@ class ProductsController extends Controller
     public function mainCatProducts(string $mainCatSlug)
     {
         $category = Categories::whereSlug($mainCatSlug)->whereStatus(1)->firstOrFail();
-        $products = $category->products->paginate(90);
+        $products = $category->products->reverse()->paginate(90);
         /**
          *
          * SEO
@@ -83,7 +83,7 @@ class ProductsController extends Controller
     {
         $category_id = Categories::whereSlug($mainCatSlug)->whereStatus(1)->firstOrFail()->id;
         $subCategory = SubCategories::whereSlug($subCategorySlug)->where('category_id',$category_id)->firstOrFail();
-        $subCatPro = $subCategory->products->paginate(90);
+        $subCatPro = $subCategory->products->reverse()->paginate(90);
         /**
          * SEO
          */
