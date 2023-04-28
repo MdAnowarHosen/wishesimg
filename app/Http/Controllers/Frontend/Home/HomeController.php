@@ -18,5 +18,30 @@ class HomeController extends Controller
         ]);
     }
 
+    public function about()
+    {
+        return "About";
+    }
+
+    public function faq()
+    {
+        return "FAQ";
+    }
+
+    public function help()
+    {
+        return "Help";
+    }
+
+    public function sitemap()
+    {
+        $categories = Categories::whereStatus(1)->orderBy('name','asc')->get();
+        $products = Product::whereStatus(1)->orderBy('id','desc')->get();
+        return view('frontend.sitemap.sitemap',[
+            'products' => $products,
+            'categories' => $categories
+        ]);
+    }
+
 
 }

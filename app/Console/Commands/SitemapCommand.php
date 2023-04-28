@@ -51,6 +51,10 @@ class SitemapCommand extends Command
                 ->add(Url::create('/terms-of-service')
                     ->setPriority(0.9))
                 ->add(Url::create('/privacy-policy')
+                    ->setPriority(0.9))
+                ->add(Url::create('/faq')
+                    ->setPriority(0.9))
+                ->add(Url::create('/help')
                     ->setPriority(0.9));
 
 
