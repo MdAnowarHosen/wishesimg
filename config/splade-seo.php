@@ -14,7 +14,7 @@ return [
 
     'defaults' => [
         'title'       => env('APP_NAME', 'WishesImg'),
-        'description' => 'Get and Download wishes and mimes images for free',
+        'description' => 'Get and Download wishes and mimes images for free - Wishes Images',
         'keywords'    => ['Wishes Images', 'Good Morning Images', 'Good Night Images', 'Happy Birthday Images'],
     ],
 

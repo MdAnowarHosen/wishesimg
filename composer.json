@@ -24,7 +24,8 @@
         "protonemedia/laravel-splade-jetstream": "^1.1",
         "ryangjchandler/blade-tabler-icons": "^2.0",
         "spatie/laravel-collection-macros": "^7.12",
-        "spatie/laravel-query-builder": "^5.2"
+        "spatie/laravel-query-builder": "^5.2",
+        "spatie/laravel-sitemap": "^6.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

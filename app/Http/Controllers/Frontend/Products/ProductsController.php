@@ -25,7 +25,7 @@ class ProductsController extends Controller
          */
         $imageUrl = 'https://www.wishesimg.com'.Storage::disk('wishes')->url('wishesFiles/product/thumbnail/'.$product->thumbnail);
         SEO::title($product->name)
-        ->description($product->meta_description ?? 'Get and Download wishes and mimes images for free')
+        ->description($product->meta_description ?? 'Get and Download wishes and mimes images for free - Wishes Image')
         ->keywords($product->keywords);
 
         /**
@@ -43,7 +43,7 @@ class ProductsController extends Controller
         SEO::twitterCard('summary_large_image');
         SEO::twitterSite(env('APP_NAME','WishesImg'));
         SEO::twitterTitle($product->name);
-        SEO::twitterDescription($product->meta_description ?? 'Get and Download wishes and mimes images for free');
+        SEO::twitterDescription($product->meta_description ?? 'Get and Download wishes and mimes images for free - Wishes Image');
         SEO::twitterImage($imageUrl);
 
         /**
@@ -65,12 +65,13 @@ class ProductsController extends Controller
     public function mainCatProducts(string $mainCatSlug)
     {
         $category = Categories::whereSlug($mainCatSlug)->whereStatus(1)->firstOrFail();
-        $products = $category->products->paginate(90);
+        $products = $category->products->reverse()->paginate(90);
         /**
+         *
          * SEO
          */
         SEO::title($category->name)
-        ->description($category->description ?? 'Get and Download wishes and mimes images for free');
+        ->description($category->description ?? 'Get and Download wishes and mimes images for free - Wishes Image');
         return view('frontend.products.mainCategoriesProducts',[
             'products' => $products,
             'category' => $category->name,
@@ -82,12 +83,12 @@ class ProductsController extends Controller
     {
         $category_id = Categories::whereSlug($mainCatSlug)->whereStatus(1)->firstOrFail()->id;
         $subCategory = SubCategories::whereSlug($subCategorySlug)->where('category_id',$category_id)->firstOrFail();
-        $subCatPro = $subCategory->products->paginate(90);
+        $subCatPro = $subCategory->products->reverse()->paginate(90);
         /**
          * SEO
          */
         SEO::title($subCategory->name)
-        ->description($subCategory->description ?? 'Get and Download wishes and mimes images for free');
+        ->description($subCategory->description ?? 'Get and Download wishes and mimes images for free - Wishes Image');
         return view('frontend.products.subCategoriesProducts',[
             'subCatPro' => $subCatPro,
             'subCategory' => $subCategory->name,

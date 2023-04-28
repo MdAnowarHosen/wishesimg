@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\Categories\CategoriesController;
-use App\Http\Controllers\Admin\Categories\SubCategoriesController;
+
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Products\ProductsController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Foundation\Application;
+use App\Http\Controllers\Admin\Categories\CategoriesController;
+use App\Http\Controllers\Admin\Categories\SubCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,6 @@ Route::middleware(['splade'])->group(function () {
         'auth',
         config('jetstream.auth_session'),
         'verified',
-        'customVerified',
         'admin'
     ])->prefix('wishes/admin')->name('admin.')->group(function ()
     {
@@ -48,8 +47,5 @@ Route::middleware(['splade'])->group(function () {
         Route::get('products/get/subcategory/{category}',[ProductsController::class,'getSubCategory'])->name('get.subcategory');
         // product edit get category
         Route::get('products/{product}/get/subcategory/{category}',[ProductsController::class,'getSubCategoryEdit'])->name('get.subcategory.edit');
-
-
-
     });
 });

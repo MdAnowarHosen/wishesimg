@@ -20,6 +20,11 @@ Route::middleware(['splade'])->group(function () {
     Route::controller(HomeController::class)->group(function ()
     {
         Route::get('/', 'index')->name('/');
+        Route::get('/about', 'about')->name('about');
+        Route::get('/contact', 'contact')->name('contact');
+        Route::get('/faq', 'faq')->name('faq');
+        Route::get('/help', 'help')->name('help');
+        Route::get('/sitemap', 'sitemap')->name('sitemap');
     });
 
     /**
