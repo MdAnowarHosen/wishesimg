@@ -51,7 +51,4 @@ Route::middleware(['splade'])->group(function () {
     //     Route::view('/dashboard', 'dashboard')->name('dashboard');
     // });
 
-    Route::get('/test',function(){
-       // return view('test.test');
-    });
 });
