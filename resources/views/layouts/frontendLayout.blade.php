@@ -128,7 +128,7 @@
                 <ul class="space-y-2">
                    <li>
                       <a href="{{ route('/') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <x-entypo-home class="w-5 h-5 text-amber-600 inline" /> <span class="ml-3 inline">Home</span>
+                        <x-entypo-home class="w-5 h-5 text-amber-500 inline" /> <span class="ml-3 inline">Home</span>
                       </a>
                    </li>
                    @foreach ($boot_categories as $category)
