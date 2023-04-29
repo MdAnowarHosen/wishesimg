@@ -151,6 +151,12 @@
                  @endif
                  @endforeach
                  <li>
+                    <a href="{{ route('contact') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <x-eos-contact-page class="w-5 h-5 text-gray-600"/>
+                       <span class="flex-1 ml-3 whitespace-nowrap">Contact</span>
+                    </a>
+                 </li>
+                 <li>
                     <a href="{{ route('sitemap') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                         <x-tabler-sitemap class="w-5 h-5 text-gray-600"/>
                        <span class="flex-1 ml-3 whitespace-nowrap">Sitemap</span>
@@ -158,13 +164,19 @@
                  </li>
                  <li>
                     <a href="{{ url('privacy-policy') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <x-eos-privacy-tip-o class="w-7 h-5 text-gray-600"/>
+                        <x-eos-privacy-tip-o class="w-5 h-5 text-gray-600"/>
                        <span class="flex-1 ml-3 whitespace-nowrap">Privacy Policy</span>
                     </a>
                  </li>
                  <li>
-                    <a href="{{ route('about') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-                        <x-bi-info-circle class="w-5 h-5"/>
+                    <a href="{{ url('terms-of-service') }}" class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <x-tabler-inner-shadow-top-right class="w-5 h-5 text-gray-600"/>
+                       <span class="flex-1 ml-3 whitespace-nowrap">Terms of service</span>
+                    </a>
+                 </li>
+                 <li>
+                    <a href="{{ route('about') }}" class="flex items-center p-2 text-base font-normal text-gray-600 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <x-bi-info-circle class="w-4 h-4"/>
                        <span class="flex-1 ml-3 whitespace-nowrap">About</span>
                     </a>
                  </li>

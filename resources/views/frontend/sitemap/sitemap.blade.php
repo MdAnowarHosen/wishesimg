@@ -31,7 +31,7 @@
                 <div class="mt-5">
                    <ul class=" list-disc list-inside">
                     <li><Link href="{{ url('privacy-policy') }}">Privacy Policy</Link></li>
-                    <li><Link href="{{ url('terms-of-service') }}">Terms of services</Link></li>
+                    <li><Link href="{{ url('terms-of-service') }}">Terms of service</Link></li>
                    </ul>
                 </div>
             </div>
