@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Frontend\Bookmark\BookmarkController;
+use App\Http\Controllers\Frontend\Contact\ContactController;
 use App\Http\Controllers\Frontend\Download\DownloadController;
 use App\Http\Controllers\Frontend\Favorite\FavoriteController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,6 @@ Route::middleware(['splade'])->group(function () {
     {
         Route::get('/', 'index')->name('/');
         Route::get('/about', 'about')->name('about');
-        Route::get('/contact', 'contact')->name('contact');
         Route::get('/faq', 'faq')->name('faq');
         Route::get('/help', 'help')->name('help');
         Route::get('/sitemap', 'sitemap')->name('sitemap');
@@ -66,6 +66,16 @@ Route::middleware(['splade'])->group(function () {
      * search routes
      */
     Route::get('search',[SearchController::class,'index'])->name('search');
+
+    /**
+     * contact routes
+     */
+    Route::controller(ContactController::class)->prefix('contact')->group(function ()
+    {
+        Route::get('/', 'contact')->name('contact');
+        Route::post('/store', 'store')->name('contact.store');
+
+    });
     /**
      * products routes
      * those routes should be always at bottom

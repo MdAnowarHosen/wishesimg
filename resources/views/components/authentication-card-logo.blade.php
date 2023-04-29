@@ -1,5 +1,5 @@
 <div  class="mb-3">
-    <Link :href="'/'">
+    <a href="{{ route('/') }}">
         <img src="{{ asset('img/logo.png') }}" alt="WishesImg logo" width="55" class="mx-auto block">
-    </Link>
+    </a>
 </div>
