@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Frontend\Contact;
 
-use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Models\Contact\Contact;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\Facades\SEO;

@@ -3,6 +3,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\Contact\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\Products\ProductsController;
 use App\Http\Controllers\Admin\Categories\CategoriesController;
 use App\Http\Controllers\Admin\Categories\SubCategoriesController;
@@ -47,5 +48,15 @@ Route::middleware(['splade'])->group(function () {
         Route::get('products/get/subcategory/{category}',[ProductsController::class,'getSubCategory'])->name('get.subcategory');
         // product edit get category
         Route::get('products/{product}/get/subcategory/{category}',[ProductsController::class,'getSubCategoryEdit'])->name('get.subcategory.edit');
+
+        /**
+         * contact routes for admin
+         */
+        Route::controller(AdminContactController::class)->prefix('contact')->group(function ()
+        {
+            Route::get('/', 'index')->name('contact.show');
+            Route::get('/view/{contact}', 'view')->name('contact.view');
+        });
+
     });
 });

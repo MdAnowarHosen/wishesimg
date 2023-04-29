@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Products\Product;
+use Illuminate\Support\Facades\Auth;
 use ProtoneMedia\Splade\SpladeTable;
 use App\Models\Categories\Categories;
 use Illuminate\Support\Facades\Request;
