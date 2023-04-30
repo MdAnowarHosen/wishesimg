@@ -12,7 +12,7 @@
                 <div class="tooltip-arrow" data-popper-arrow></div>
             </div>
             @else
-            <a href="#" data-tooltip-target="tooltip-home" class="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
+            <a href="{{ route('contact') }}" data-tooltip-target="tooltip-home" class="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
                 <x-eos-perm-contact-calendar class="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" />
                 <span class="sr-only">Contact</span>
             </a>
