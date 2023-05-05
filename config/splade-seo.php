@@ -20,7 +20,7 @@ return [
 
     'title_prefix'    => '',
     'title_separator' => '-',
-    'title_suffix'    => 'WishesImg',
+    'title_suffix'    => env('APP_NAME', 'WishesImg'),
 
     'auto_canonical_link' => true,
 
