@@ -14,13 +14,13 @@ return [
 
     'defaults' => [
         'title'       => env('APP_NAME', 'WishesImg'),
-        'description' => 'Get and Download wishes and mimes images for free - Wishes Images',
+        'description' => env('LONG_TITLE', 'Get and Download wishes and mimes images for free'),
         'keywords'    => ['Wishes Images', 'Good Morning Images', 'Good Night Images', 'Happy Birthday Images'],
     ],
 
     'title_prefix'    => '',
     'title_separator' => '-',
-    'title_suffix'    => 'Get and Download wishes and mimes images for free',
+    'title_suffix'    => 'WishesImg',
 
     'auto_canonical_link' => true,
 
