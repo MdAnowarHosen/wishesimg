@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use ProtoneMedia\Splade\Facades\SEO;
 use App\Models\Categories\Categories;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Categories\SubCategories;
 
@@ -25,7 +26,7 @@ class ProductsController extends Controller
          */
         $imageUrl = 'https://www.wishesimg.com'.Storage::disk('wishes')->url('wishesFiles/product/thumbnail/'.$product->thumbnail);
         SEO::title($product->name)
-        ->description($product->meta_description ?? 'Get and Download wishes and mimes images for free - Wishes Image')
+        ->description($product->meta_description ?? Config::get('app.long_title'))
         ->keywords($product->keywords);
 
         /**
@@ -43,7 +44,7 @@ class ProductsController extends Controller
         SEO::twitterCard('summary_large_image');
         SEO::twitterSite(env('APP_NAME','WishesImg'));
         SEO::twitterTitle($product->name);
-        SEO::twitterDescription($product->meta_description ?? 'Get and Download wishes and mimes images for free - Wishes Image');
+        SEO::twitterDescription($product->meta_description ?? Config::get('app.long_title'));
         SEO::twitterImage($imageUrl);
 
         /**
@@ -71,7 +72,7 @@ class ProductsController extends Controller
          * SEO
          */
         SEO::title($category->name)
-        ->description($category->description ?? 'Get and Download wishes and mimes images for free - Wishes Image');
+        ->description($category->description ?? Config::get('app.long_title'));
         return view('frontend.products.mainCategoriesProducts',[
             'products' => $products,
             'category' => $category->name,
@@ -88,7 +89,7 @@ class ProductsController extends Controller
          * SEO
          */
         SEO::title($subCategory->name)
-        ->description($subCategory->description ?? 'Get and Download wishes and mimes images for free - Wishes Image');
+        ->description($subCategory->description ?? Config::get('app.long_title'));
         return view('frontend.products.subCategoriesProducts',[
             'subCatPro' => $subCatPro,
             'subCategory' => $subCategory->name,
