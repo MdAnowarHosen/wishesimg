@@ -16,6 +16,7 @@ class HomeController extends Controller
 
     public function index()
     {
+        SEO::title(env('LONG_TITLE'));
         return view('frontend.home.index',[
             'products' => Product::whereStatus(1)->orderBy('id','desc')->take(27)->get(),
         ]);
