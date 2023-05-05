@@ -373,6 +373,8 @@ class ProductsController extends Controller
                  * remove old product photo
                  *
                  */
+                if ($image != null)
+                {
                     $path = "product/thumbnail/" . $old->thumbnail;
                     if (Storage::disk('wishes')->exists($path))
                     {
@@ -393,7 +395,7 @@ class ProductsController extends Controller
                     {
                         Storage::disk('wishes')->delete($path);
                     }
-
+                }
                     // store updater data
                     Updater::create([
                         'product_id' => $product->id,

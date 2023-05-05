@@ -141,6 +141,11 @@
                     </button>
 
                     <ul id="{{ $category->slug }}" class="hidden py-2 space-y-1">
+                        {{-- main category link --}}
+                        <li>
+                            <a href="{{ route('images.main.products',['mainCatSlug'=>$category->slug]) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <x-bi-folder-fill  class="w-5 h-5 mr-2 text-amber-400"/> {{ $category->name }}</a>
+                         </li>
+                        {{-- main category link end--}}
                           @foreach ($category->activatedSubCatsAsc as $subCat)
                           <li>
                              <a href="{{ route('images.subcat.products',['mainCatSlug'=>$category->slug, 'subCategorySlug'=>$subCat->slug]) }}" class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-5 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"> <x-bi-folder-fill  class="w-5 h-5 mr-2 text-amber-400"/> {{ $subCat->name }}</a>
