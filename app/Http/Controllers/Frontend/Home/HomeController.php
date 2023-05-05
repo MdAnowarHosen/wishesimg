@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Frontend\Home;
 
-use App\Http\Controllers\Controller;
-use App\Models\Categories\Categories;
-use App\Models\Products\Product;
-use Illuminate\Http\Request;
-use Laravel\Jetstream\Jetstream;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Models\Products\Product;
+use Laravel\Jetstream\Jetstream;
+use App\Http\Controllers\Controller;
 use ProtoneMedia\Splade\Facades\SEO;
+use App\Models\Categories\Categories;
+use Illuminate\Support\Facades\Config;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        SEO::title(env('LONG_TITLE'));
+        SEO::title(Config::get('app.long_title'));
         return view('frontend.home.index',[
             'products' => Product::whereStatus(1)->orderBy('id','desc')->take(27)->get(),
         ]);
