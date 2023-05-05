@@ -58,6 +58,12 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    /**
+     * long title for seo
+     * custom added
+     */
+    'long_title' => env('LONG_TITLE'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
