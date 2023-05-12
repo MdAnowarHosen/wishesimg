@@ -7,3 +7,4 @@
 
     gtag('config', 'G-Y9EBVC41W1');
     </script>
+    <meta name="yandex-verification" content="9d3fe10cec6c3a26" />
