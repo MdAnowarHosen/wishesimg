@@ -200,7 +200,12 @@
                     </div>
                     {{-- ad section --}}
                     <div class="col-span-12 md:col-span-3">
-                        <div class="hidden md:block sticky top-20 mb-1">
+                        {{-- <div class="hidden md:block sticky top-20 mb-1">
+                            <div class="rounded" style="width: 250px; height: 300px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
+                                Ads
+                            </div>
+                        </div> --}}
+                        <div class="hidden md:block top-20 mb-1">
                             <div class="rounded" style="width: 250px; height: 300px; background: #e2e5e7; color: #424242; line-height: 300px; text-align: center; ">
                                 Ads
                             </div>
