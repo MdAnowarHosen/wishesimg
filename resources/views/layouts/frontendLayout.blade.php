@@ -7,7 +7,7 @@
     <meta name="google-site-verification" content="gGvxel-XKsdNkFgH6gijPGsFv5zuY9hu9gAPxRmjVaE" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
     @spladeHead
-    @if (env('APP_ENV') != 'local')
+    @if (Config::get('app.env') != 'local')
         @include('include.track')
     @endif
     @vite('resources/js/app.js')
