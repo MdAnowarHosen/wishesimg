@@ -11,6 +11,7 @@
 /public/.htaccess
 /public/.user.ini
 /public/php.ini
+/public/error_log
 /vendor
 /storage/splade-temporary-file-uploads
 /storage/splade-temporary-file-uploads/*
