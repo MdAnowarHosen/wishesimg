@@ -8,6 +8,7 @@
 /public/wishesFiles
 /public/wishesFiles/*
 /public/sitemap.xml
+/public/.htaccess
 /vendor
 /storage/splade-temporary-file-uploads
 /storage/splade-temporary-file-uploads/*
