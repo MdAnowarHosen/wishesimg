@@ -26,7 +26,7 @@
         <img class="h-40 w-auto" src="{{ Storage::disk('wishes')->url('wishesFiles/product/thumbnail/'.$product->thumbnail) }}" alt="{{ $product->name }}">
         <x-splade-input name="keywords" label="Keywords" placeholder="Keywords" />
         <x-splade-input name="meta_description" label="Meta Description" placeholder="Meta Description" />
-        <x-splade-textarea name="description" label="Description" autosize />
+        <x-splade-wysiwyg name="description" label="Description"/>
         <x-splade-checkbox name="draft" value="1" label="Draft" />
     </div>
     <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>

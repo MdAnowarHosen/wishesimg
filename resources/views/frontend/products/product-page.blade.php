@@ -106,10 +106,12 @@
                       </div>
         {{-- mobile favorite, bookmark, share button end--}}
                     <div class=" mt-5">
-                        <p class=" leading-7 text-gray-800">
-                            <span class=" text-lg font-bold text-gray-800">Description: </span>
-                            {{ $product->description }}
-                        </p>
+                        <div class=" leading-7 text-gray-800">
+                            <p class=" text-lg font-bold text-gray-800">Description: </p>
+                            <div>
+                                {!! $product->description !!}
+                            </div>
+                        </div>
                     </div>
                     <div class="mt-10">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

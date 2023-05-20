@@ -47,8 +47,8 @@ class ProductsController extends Controller
 
         $products = QueryBuilder::for(Product::class)
         ->defaultSort('-id')
-        ->allowedSorts('id','name','slug','description','categories.id','subcategories.id','categories.name','subcategories.name')
-        ->allowedFilters('name','slug','description','categories.id','subcategories.id','categories.name','subcategories.name', $globalSearch)
+        ->allowedSorts('id','name','slug','categories.id','subcategories.id','categories.name','subcategories.name')
+        ->allowedFilters('name','slug','categories.id','subcategories.id','categories.name','subcategories.name', $globalSearch)
         ->paginate()
         ->withQueryString();
 
@@ -63,7 +63,6 @@ class ProductsController extends Controller
             ->column('image')
             ->column('name', sortable:true,searchable:true)
             ->column('slug', sortable:true,searchable:true)
-            ->column('description', sortable:true,searchable:true)
            // ->rowLink(fn (Product $product) => route('admin.products.show', $product))
            ->column(
                 key: 'categories.name',
