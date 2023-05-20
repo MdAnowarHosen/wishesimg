@@ -4271,16 +4271,16 @@
         },
         {
             "name": "protonemedia/laravel-splade",
-            "version": "1.4.7",
+            "version": "1.4.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protonemedia/laravel-splade.git",
-                "reference": "3f07d22cb5e49ffb2e8769e80abd616720deabfc"
+                "reference": "6dc4cecaeb57dd1dbe6ff82a1be4c5fd04ce0f26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protonemedia/laravel-splade/zipball/3f07d22cb5e49ffb2e8769e80abd616720deabfc",
-                "reference": "3f07d22cb5e49ffb2e8769e80abd616720deabfc",
+                "url": "https://api.github.com/repos/protonemedia/laravel-splade/zipball/6dc4cecaeb57dd1dbe6ff82a1be4c5fd04ce0f26",
+                "reference": "6dc4cecaeb57dd1dbe6ff82a1be4c5fd04ce0f26",
                 "shasum": ""
             },
             "require": {
@@ -4341,7 +4341,7 @@
             ],
             "support": {
                 "issues": "https://github.com/protonemedia/laravel-splade/issues",
-                "source": "https://github.com/protonemedia/laravel-splade/tree/1.4.7"
+                "source": "https://github.com/protonemedia/laravel-splade/tree/1.4.11"
             },
             "funding": [
                 {
@@ -4349,7 +4349,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-30T23:11:49+00:00"
+            "time": "2023-05-18T22:14:12+00:00"
         },
         {
             "name": "protonemedia/laravel-splade-jetstream",
