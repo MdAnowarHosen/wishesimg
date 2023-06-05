@@ -9,6 +9,6 @@
     </script>
     <meta name="yandex-verification" content="9d3fe10cec6c3a26" />
     {{-- google adsense code --}}
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6643057769918459"
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9322972272372671"
      crossorigin="anonymous"></script>
     {{-- google adsense code end --}}
