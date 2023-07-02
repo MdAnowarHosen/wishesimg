@@ -1,4 +1,4 @@
-<x-frontendLayout>
+<x-frontend-layout>
     <section>
         <div class="bg-slate-100 py-5 rounded-full text-center mb-3">
             <h1 class=" text-lg font-semibold">Sitemap</h1>
@@ -122,4 +122,4 @@
             </div>
         </div>
     </section>
-</x-frontendLayout>
+</x-frontend-layout>

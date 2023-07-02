@@ -1,4 +1,4 @@
-<x-frontendLayout>
+<x-frontend-layout>
     <section>
         <h1 class=" font-semibold text-lg mb-5 mt-2">My Bookmarks</h1>
         <x-splade-table :for="$bookmarks" as="$bookmark" search-debounce="1000">
@@ -9,4 +9,4 @@
             @endcell
         </x-splade-table>
     </section>
-</x-frontendLayout>
+</x-frontend-layout>

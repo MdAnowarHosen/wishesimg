@@ -1,4 +1,4 @@
-<x-frontendLayout>
+<x-frontend-layout>
     <section>
         <div class="bg-slate-100 py-5 rounded-full text-center mb-3">
             <h1 class=" text-lg font-semibold capitalize">{{ $title }}</h1>
@@ -31,5 +31,5 @@
                 {{ $products->links() }}
             </div>
     </section>
-</x-frontendLayout>
+</x-frontend-layout>
 @endif

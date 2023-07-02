@@ -1,6 +1,6 @@
 
 
-<x-frontendLayout>
+<x-frontend-layout>
     <section>
 {{-- images --}}
     <div class="grid grid-cols-12 gap-5">
@@ -358,5 +358,5 @@
 </div>
 {{-- images end --}}
 </section>
-</x-frontendLayout>
+</x-frontend-layout>
 
