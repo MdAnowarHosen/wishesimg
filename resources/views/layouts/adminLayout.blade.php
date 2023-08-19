@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-    {{-- main section start --}}
+    {{-- primary section start --}}
     <section>
         <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <div class="px-3 py-3 lg:px-5 lg:pl-3">
@@ -183,7 +183,7 @@
         </div>
          {{-- floating action button end--}}
     </section>
-    {{-- main section end --}}
+    {{-- primary section end --}}
 @stack('scripts')
 </body>
 </html>

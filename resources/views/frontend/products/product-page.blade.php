@@ -1,5 +1,7 @@
 
-<section>
+
+<x-frontend-layout>
+    <section>
 {{-- images --}}
     <div class="grid grid-cols-12 gap-5">
         <div class="col-span-12 md:col-span-8">
@@ -356,11 +358,5 @@
 </div>
 {{-- images end --}}
 </section>
+</x-frontend-layout>
 
-@push('scripts')
-<x-splade-script>
-    function download(form){
-        console.log('ok');
-    }
-</x-splade-script>
-@endpush
