@@ -5,6 +5,7 @@ import "@protonemedia/laravel-splade/dist/jodit.css";
 
 import { createApp } from "vue/dist/vue.esm-bundler.js";
 import { renderSpladeApp, SpladePlugin } from "@protonemedia/laravel-splade";
+// import 'flowbite';
 
 const el = document.getElementById("app");
 

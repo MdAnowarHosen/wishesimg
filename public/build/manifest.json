@@ -1,6 +1,6 @@
 {
   "resources/js/app.js": {
-    "file": "assets/app.37f46604.js",
+    "file": "assets/app.e8026b4e.js",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
@@ -17,7 +17,7 @@
       "_nprogress.2ab7724f.js"
     ],
     "css": [
-      "assets/app.85237a52.css"
+      "assets/app.dd442a0e.css"
     ]
   },
   "node_modules/filepond-plugin-image-exif-orientation/dist/filepond-plugin-image-exif-orientation.esm.js": {
@@ -85,7 +85,7 @@
     ]
   },
   "resources/js/app.css": {
-    "file": "assets/app.85237a52.css",
+    "file": "assets/app.dd442a0e.css",
     "src": "resources/js/app.css"
   }
 }
