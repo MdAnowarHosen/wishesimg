@@ -114,7 +114,7 @@
             </div>
           </nav>
 
-        <div :class="{'block': sidebar.open, 'hidden': ! sidebar.open}" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform  bg-white border-r border-gray-200 translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
+        <div :class="{'translate-x-0': sidebar.open, 'hidden md:block': ! sidebar.open}"  class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform  bg-white border-r border-gray-200 translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
              <div class="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                 <ul class="space-y-2 pb-11 md:pb-0">
                    <li>

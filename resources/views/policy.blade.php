@@ -1,5 +1,6 @@
 @seoTitle(__('Privacy Policy'))
 
+<x-frontend-layout>
 <section>
     <div class="font-sans text-gray-900 antialiased">
         <div class="pt-4 bg-gray-100">
@@ -9,3 +10,4 @@
         </div>
     </div>
 </section>
+</x-frontend-layout>
